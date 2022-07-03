@@ -23,7 +23,7 @@ address20 = [
 address32 = [
     "errmapgen/address32",
     "mv-core-types/address32",
-    "move-idl-types/address20"
+    "move-idl-types/address32"
 ]
 
 [dependencies]
