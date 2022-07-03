@@ -1,0 +1,31 @@
+[package]
+name = "errmapgen"
+version = "0.1.0"
+description = "Move error map generator."
+homepage = "https://moving.wtf"
+repository = "https://github.com/movingco/move-idl"
+authors = ["Ian Macalinao <ian@moving.wtf>"]
+license = "Apache-2.0"
+edition = "2021"
+keywords = ["move", "diem", "token"]
+
+[features]
+default = []
+address20 = [
+    "errmap/address20",
+    "mv-core-types/address20",
+    "static-address/address20"
+]
+address32 = [
+    "errmap/address32",
+    "mv-core-types/address32",
+    "static-address/address32"
+]
+
+[dependencies]
+anyhow = "1.0.42"
+errmap = "0.1.0"
+mv-core-types = "0.1.4"
+mv-model = "0.1.4"
+serde = { version = "1.0", features = ["derive"] }
+static-address = "0.1"

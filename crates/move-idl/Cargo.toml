@@ -1,0 +1,39 @@
+[package]
+name = "move-idl"
+version = "0.1.0"
+description = "Move IDL"
+homepage = "https://moving.wtf"
+repository = "https://github.com/movingco/move-idl"
+authors = ["Ian Macalinao <ian@moving.wtf>"]
+license = "Apache-2.0"
+edition = "2021"
+keywords = ["move", "diem", "token"]
+
+[lib]
+name = "move_idl"
+path = "src/lib.rs"
+
+[features]
+default = []
+address20 = [
+    "errmapgen/address20",
+    "mv-core-types/address20",
+    "move-idl-types/address20"
+]
+address32 = [
+    "errmapgen/address32",
+    "mv-core-types/address32",
+    "move-idl-types/address20"
+]
+
+[dependencies]
+anyhow = "1.0.42"
+errmapgen = { version = "0.1.0", path = "../errmapgen" }
+module-id = "0.1.4"
+move-bytecode-verifier = "0.1.4"
+move-idl-types = { version = "0.1.0", path = "../move-idl-types" }
+mv-binary-format = "0.1.5"
+mv-core-types = "0.1.5"
+mv-model = "0.1.5"
+mv-package = "0.1.5"
+serde = { version = "1.0", features = ["derive"] }
