@@ -16,7 +16,11 @@ address20 = [
     "module-id/address20",
     "mv-core-types/address20"
 ]
-address32 = ["errmap/address32", "errmap/address32", "mv-core-types/address32"]
+address32 = [
+    "errmap/address32",
+    "module-id/address32",
+    "mv-core-types/address32"
+]
 
 [dependencies]
 errmap = "0.1.4"
