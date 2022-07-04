@@ -7,7 +7,7 @@ repository = "https://github.com/movingco/move-idl"
 authors = ["Ian Macalinao <ian@moving.wtf>"]
 license = "Apache-2.0"
 edition = "2021"
-keywords = ["move", "diem", "token"]
+keywords = ["move", "diem"]
 
 [features]
 default = []
