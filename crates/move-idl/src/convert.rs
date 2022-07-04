@@ -83,7 +83,7 @@ pub fn get_idl_type_for_type(env: &GlobalEnv, ty: &Type) -> Result<IDLType> {
             })
         }
 
-        Type::TypeParameter(n) => IDLType::TypeParameter(*n),
+        Type::TypeParameter(n) => IDLType::TypeParam(*n),
 
         ty => bail!("could not process type {:?}", ty),
     })

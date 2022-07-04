@@ -84,7 +84,7 @@ pub enum IDLType {
     U128,
     Address,
     Signer,
-    TypeParameter(u16),
+    TypeParam(u16),
 
     Tuple(Vec<IDLType>),
     Vector(Box<IDLType>),
