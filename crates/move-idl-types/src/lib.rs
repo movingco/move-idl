@@ -84,6 +84,7 @@ pub enum IDLType {
     U128,
     Address,
     Signer,
+    /// The number represents the index of the type parameter within the parent struct.
     TypeParam(u16),
 
     Tuple(Vec<IDLType>),
