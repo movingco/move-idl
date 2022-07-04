@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["IDLParseTool","Parses a Move workspace into a set of IDLs."]]});
