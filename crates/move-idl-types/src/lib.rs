@@ -46,11 +46,16 @@ pub struct IDLPackage {
     pub structs: Vec<IDLStruct>,
 }
 
+/// A struct with types.
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
-pub struct IDLStructTag {
+pub struct IDLStructType {
     /// Module ID.
     pub module_id: ModuleIdData,
+    /// Name of the struct.
     pub name: String,
+    /// Type arguments of the struct, if applicable.
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub ty_args: Vec<IDLType>,
 }
 
 /// Simplified ABI for a Move module.
@@ -70,7 +75,7 @@ pub struct IDLModule {
 }
 
 /// A type represented in the IDL.
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "snake_case")]
 pub enum IDLType {
     Bool,
@@ -83,7 +88,7 @@ pub enum IDLType {
 
     Tuple(Vec<IDLType>),
     Vector(Box<IDLType>),
-    Struct(IDLStructTag),
+    Struct(IDLStructType),
 }
 
 /// An `Ability` classifies what operations are permitted for a given type

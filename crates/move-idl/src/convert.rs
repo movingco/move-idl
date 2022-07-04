@@ -9,7 +9,7 @@ use move_model::{
 };
 
 /// Gets the [TypeTag] associated with a [ty::Type].
-pub fn get_type_tag_for_type(move_type: &ty::Type) -> anyhow::Result<Option<TypeTag>> {
+pub fn get_type_tag_for_type(move_type: &Type) -> Result<Option<TypeTag>> {
     use ty::Type::*;
     let tag = match move_type {
         Primitive(prim) => {
@@ -48,14 +48,15 @@ pub fn get_type_tag_for_type(move_type: &ty::Type) -> anyhow::Result<Option<Type
 
 /// Gets the [IDLType] associated with a [Type].
 pub fn get_idl_type_for_type(env: &GlobalEnv, ty: &Type) -> Result<IDLType> {
+    use ty::PrimitiveType;
     Ok(match ty {
         Type::Primitive(pr) => match pr {
-            ty::PrimitiveType::Bool => IDLType::Bool,
-            ty::PrimitiveType::U8 => IDLType::U8,
-            ty::PrimitiveType::U64 => IDLType::U64,
-            ty::PrimitiveType::U128 => IDLType::U128,
-            ty::PrimitiveType::Address => IDLType::Address,
-            ty::PrimitiveType::Signer => IDLType::Signer,
+            PrimitiveType::Bool => IDLType::Bool,
+            PrimitiveType::U8 => IDLType::U8,
+            PrimitiveType::U64 => IDLType::U64,
+            PrimitiveType::U128 => IDLType::U128,
+            PrimitiveType::Address => IDLType::Address,
+            PrimitiveType::Signer => IDLType::Signer,
             ty => bail!("unknown primitive {:?}", ty),
         },
         Type::Tuple(inner) => IDLType::Tuple(
@@ -65,16 +66,20 @@ pub fn get_idl_type_for_type(env: &GlobalEnv, ty: &Type) -> Result<IDLType> {
                 .collect::<Result<Vec<_>>>()?,
         ),
         Type::Vector(inner) => IDLType::Vector(Box::new(get_idl_type_for_type(env, inner)?)),
-        Type::Struct(_, _, _) => {
+        Type::Struct(_, _, ty_args) => {
             let (struct_env, _) = ty
                 .get_struct(env)
                 .ok_or_else(|| anyhow!("struct could not be found"))?;
-            IDLType::Struct(IDLStructTag {
+            IDLType::Struct(IDLStructType {
                 module_id: struct_env.module_env.get_verified_module().self_id().into(),
                 name: struct_env
                     .get_name()
                     .display(struct_env.symbol_pool())
                     .to_string(),
+                ty_args: ty_args
+                    .iter()
+                    .map(|tp| get_idl_type_for_type(env, tp))
+                    .collect::<Result<Vec<_>>>()?,
             })
         }
 
