@@ -1,6 +1,6 @@
 [package]
 name = "json-cli"
-version = "0.1.0"
+version = "0.1.1"
 description = "Helpers for creating CLIs with serializable JSON output."
 homepage = "https://moving.wtf"
 repository = "https://github.com/movingco/move-idl"
