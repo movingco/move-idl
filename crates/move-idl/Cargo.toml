@@ -8,6 +8,7 @@ authors = ["Ian Macalinao <ian@moving.wtf>"]
 license = "Apache-2.0"
 edition = "2021"
 keywords = ["move", "diem", "token"]
+readme = "../../README.md"
 
 [lib]
 name = "move_idl"

@@ -1,4 +1,4 @@
-//! Types for the Move IDL specification.
+//! Rust types for the Move IDL specification.
 
 use errmap::{ErrorDescription, ErrorMapping};
 use module_id::ModuleIdData;

@@ -1,7 +1,7 @@
 [package]
 name = "errmapgen"
 version = "0.1.0"
-description = "Move error map generator."
+description = "Move JSON error map generator."
 homepage = "https://moving.wtf"
 repository = "https://github.com/movingco/move-idl"
 authors = ["Ian Macalinao <ian@moving.wtf>"]

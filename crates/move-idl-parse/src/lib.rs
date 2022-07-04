@@ -1,3 +1,4 @@
+//! CLI for parsing an IDL from a Move package.
 use std::path::PathBuf;
 
 use anyhow::*;

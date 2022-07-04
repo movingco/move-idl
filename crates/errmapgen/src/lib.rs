@@ -1,4 +1,4 @@
-//!  Error map parsing. Largely based off of Diem code.
+//! Error map parsing. Largely based off of Diem code.
 
 // Copyright (c) The Diem Core Contributors
 // Copyright (c) The Move Contributors
