@@ -155,6 +155,11 @@
 <span id="150">150</span>
 <span id="151">151</span>
 <span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Rust types for the Move IDL specification.</span>
 
 <span class="kw">use</span> <span class="ident">errmap</span>::{<span class="ident">ErrorDescription</span>, <span class="ident">ErrorMapping</span>};
@@ -203,11 +208,16 @@
     <span class="kw">pub</span> <span class="ident">structs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">IDLStruct</span><span class="op">&gt;</span>,
 }
 
+<span class="doccomment">/// A struct with types.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IDLStructTag</span> {
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IDLStructType</span> {
     <span class="doccomment">/// Module ID.</span>
     <span class="kw">pub</span> <span class="ident">module_id</span>: <span class="ident">ModuleIdData</span>,
+    <span class="doccomment">/// Name of the struct.</span>
     <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
+    <span class="doccomment">/// Type arguments of the struct, if applicable.</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Vec::is_empty&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="ident">ty_args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">IDLType</span><span class="op">&gt;</span>,
 }
 
 <span class="doccomment">/// Simplified ABI for a Move module.</span>
@@ -227,7 +237,7 @@
 }
 
 <span class="doccomment">/// A type represented in the IDL.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename_all</span> <span class="op">=</span> <span class="string">&quot;snake_case&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">IDLType</span> {
     <span class="ident">Bool</span>,
@@ -240,7 +250,7 @@
 
     <span class="ident">Tuple</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">IDLType</span><span class="op">&gt;</span>),
     <span class="ident">Vector</span>(<span class="ident">Box</span><span class="op">&lt;</span><span class="ident">IDLType</span><span class="op">&gt;</span>),
-    <span class="ident">Struct</span>(<span class="ident">IDLStructTag</span>),
+    <span class="ident">Struct</span>(<span class="ident">IDLStructType</span>),
 }
 
 <span class="doccomment">/// An `Ability` classifies what operations are permitted for a given type</span>
