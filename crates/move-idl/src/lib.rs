@@ -3,11 +3,14 @@
 use anyhow::*;
 use errmapgen::{ErrmapGen, ErrmapOptions};
 use generate::gen_module::{generate_idl_for_module, generate_idl_structs_for_module};
-use move_core_types::account_address::AccountAddress;
+use move_core_types::{account_address::AccountAddress, language_storage::ModuleId};
 pub use move_idl_types::*;
 use move_model::model::GlobalEnv;
 use move_package::{resolution::resolution_graph::ResolutionPackage, BuildConfig, ModelConfig};
-use std::{collections::BTreeMap, path::Path};
+use std::{
+    collections::{BTreeMap, HashSet},
+    path::Path,
+};
 
 pub mod convert;
 pub mod generate;
@@ -29,6 +32,8 @@ pub struct IDLBuilder {
 }
 
 impl IDLBuilder {
+    /// # Arguments
+    /// - `generate_all_targets` - If true, rich IDLs will be generated for dependencies in addition to the module.
     pub fn load(root_path: &Path) -> Result<IDLBuilder> {
         let build_config = BuildConfig {
             generate_docs: true,
@@ -41,15 +46,7 @@ impl IDLBuilder {
             .resolution_graph_for_package(root_path)?;
         let root_package = &resolution_graph.root_package.package;
 
-        let model = build_config.clone().move_model_for_package(
-            root_path,
-            ModelConfig {
-                all_files_as_targets: false,
-                target_filter: None,
-            },
-        )?;
-
-        let env_all_targets = build_config.move_model_for_package(
+        let env_all_targets = build_config.clone().move_model_for_package(
             root_path,
             ModelConfig {
                 all_files_as_targets: true,
@@ -57,9 +54,17 @@ impl IDLBuilder {
             },
         )?;
 
+        let env = build_config.move_model_for_package(
+            root_path,
+            ModelConfig {
+                all_files_as_targets: false,
+                target_filter: None,
+            },
+        )?;
+
         Ok(IDLBuilder {
             package: resolution_graph.package_table[&root_package.name].clone(),
-            env: model,
+            env,
             env_all_targets,
         })
     }
@@ -82,23 +87,35 @@ impl IDLBuilder {
         let error_mapping =
             ErrmapGen::new(&self.env_all_targets, &ErrmapOptions::default()).gen()?;
 
-        for module in self.env.get_modules() {
-            if !module.is_script_module() {
-                let abi = generate_idl_for_module(&self.env, &error_mapping, module.clone())?;
-                if module.is_target() {
-                    modules.insert(abi.module_id.name().to_string(), abi);
-                } else {
-                    dependencies.insert(abi.module_id.name().to_string(), abi);
-                }
-            }
-        }
-
         let structs = self
-            .env
+            .env_all_targets
             .get_modules()
-            .map(|module_env| generate_idl_structs_for_module(&self.env, module_env))
+            .map(|module_env| generate_idl_structs_for_module(&self.env_all_targets, module_env))
             .collect::<Result<Vec<Vec<IDLStruct>>>>()?
             .concat();
+
+        let relevant_module_ids: HashSet<ModuleId> = self
+            .env
+            .get_modules()
+            .map(|m| m.get_verified_module().self_id())
+            .collect();
+
+        for module in self.env_all_targets.get_modules() {
+            if !relevant_module_ids.contains(&module.get_verified_module().self_id()) {
+                continue;
+            }
+            if module.is_script_module() {
+                continue;
+            }
+
+            let idl =
+                generate_idl_for_module(&self.env_all_targets, &error_mapping, module.clone())?;
+            if module.is_target() {
+                modules.insert(idl.module_id.name().to_string(), idl);
+            } else {
+                dependencies.insert(idl.module_id.name().to_string(), idl);
+            }
+        }
 
         Ok(IDLPackage {
             name: self.package.source_package.package.name.as_str().into(),

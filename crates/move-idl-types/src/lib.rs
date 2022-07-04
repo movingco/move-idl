@@ -10,17 +10,17 @@ use std::collections::{BTreeMap, BTreeSet};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IDLError {
     /// The constant name of error e.g., ECANT_PAY_DEPOSIT
-    pub code_name: String,
+    pub name: String,
     /// The code description. This is generated from the doc comments on the constant.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub code_description: Option<String>,
+    pub doc: Option<String>,
 }
 
 impl From<&ErrorDescription> for IDLError {
     fn from(desc: &ErrorDescription) -> Self {
         IDLError {
-            code_name: desc.code_name.clone(),
-            code_description: if desc.code_description.is_empty() {
+            name: desc.code_name.clone(),
+            doc: if desc.code_description.is_empty() {
                 None
             } else {
                 Some(desc.code_description.clone())
@@ -107,8 +107,8 @@ pub enum IDLAbility {
 /// A struct.
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct IDLStruct {
-    /// Name of the module.
-    pub module_name: ModuleIdData,
+    /// ID of the module.
+    pub module_id: ModuleIdData,
     /// Name of the struct.
     pub name: String,
     /// Documentation.

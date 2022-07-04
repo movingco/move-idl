@@ -1,0 +1,47 @@
+[package]
+name = "move-idl-parse"
+version = "0.1.0"
+description = "CLI for parsing an IDL from a Move package."
+homepage = "https://moving.wtf"
+repository = "https://github.com/movingco/move-idl"
+authors = ["Ian Macalinao <ian@moving.wtf>"]
+license = "Apache-2.0"
+edition = "2021"
+keywords = ["move", "diem", "token"]
+
+[features]
+default = []
+address20 = [
+    "move-idl/address20",
+    "errmapgen/address20",
+    "mv-core-types/address20",
+    "move-idl-types/address20"
+]
+address32 = [
+    "move-idl/address32",
+    "errmapgen/address32",
+    "mv-core-types/address32",
+    "move-idl-types/address32"
+]
+
+[dependencies]
+anyhow = "1.0.42"
+async-trait = "0.1.56"
+clap = { version = "3.2", features = ["derive"] }
+errmapgen = { version = "0.1.0", path = "../errmapgen" }
+json-cli = { version = "0.1.0", path = "../json-cli" }
+module-id = "0.1.4"
+move-bytecode-verifier = "0.1.4"
+move-idl = { version = "0.1.0", path = "../move-idl" }
+move-idl-types = { version = "0.1.0", path = "../move-idl-types" }
+mv-binary-format = "0.1.5"
+mv-core-types = "0.1.5"
+mv-model = "0.1.5"
+mv-package = "0.1.5"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0.81"
+tokio = { version = "1.18.2", features = ["full"] }
+
+[[bin]]
+name = "move-idl-parse"
+path = "./src/bin/move-idl-parse.rs"

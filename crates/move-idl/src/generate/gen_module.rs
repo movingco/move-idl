@@ -2,6 +2,7 @@
 
 use anyhow::*;
 use errmapgen::{ErrorDescription, ErrorMapping};
+use module_id::ModuleIdData;
 use move_bytecode_verifier::script_signature;
 use move_core_types::identifier::IdentStr;
 use move_idl_types::{IDLModule, IDLStruct};
@@ -94,13 +95,15 @@ pub fn generate_idl_errors_for_module(
     error_mapping: &ErrorMapping,
     module_env: &ModuleEnv,
 ) -> Result<BTreeMap<u64, IDLError>> {
-    let result: &BTreeMap<u64, ErrorDescription> = error_mapping
-        .module_error_maps
-        .get(&module_env.get_verified_module().self_id().into())
-        .ok_or_else(|| anyhow!("could not find module error map"))?;
+    let module_id: ModuleIdData = module_env.get_verified_module().self_id().into();
+    let result: Option<&BTreeMap<u64, ErrorDescription>> =
+        error_mapping.module_error_maps.get(&module_id);
 
-    Ok(result
-        .iter()
-        .map(|(k, v)| -> (u64, IDLError) { (*k, v.into()) })
-        .collect())
+    Ok(match result {
+        Some(result) => result
+            .iter()
+            .map(|(k, v)| -> (u64, IDLError) { (*k, v.into()) })
+            .collect(),
+        None => BTreeMap::new(),
+    })
 }

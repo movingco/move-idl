@@ -27,7 +27,7 @@ pub fn generate_idl_for_struct(env: &GlobalEnv, struct_env: &StructEnv) -> Resul
         .collect();
 
     Ok(IDLStruct {
-        module_name: struct_env.module_env.get_verified_module().self_id().into(),
+        module_id: struct_env.module_env.get_verified_module().self_id().into(),
         name: symbol_pool.string(struct_env.get_name()).to_string(),
         doc: normalize_doc_string(struct_env.get_doc()),
         fields,
