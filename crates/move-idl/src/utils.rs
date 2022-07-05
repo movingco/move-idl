@@ -18,7 +18,7 @@ pub fn normalize_indentation(string: &str) -> String {
             .min()
             .unwrap_or(0);
         string
-            .split('\n')
+            .lines()
             .map(|line| {
                 if line.len() > num_leading {
                     &line[num_leading..]
