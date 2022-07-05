@@ -868,9 +868,9 @@ dependencies = [
 
 [[package]]
 name = "mv-model"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d1ca4d021fea9e561d8cdeeeaabb514c4e5efe291381821a9f4d636f34efcf71"
+checksum = "b314d74dcfacb8f5fe941eb2155b75d0a82e73d6d424b70738cdadb2b1fe3f8b"
 dependencies = [
  "anyhow",
  "codespan",
