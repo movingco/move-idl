@@ -7,7 +7,7 @@ use move_bytecode_verifier::script_signature;
 use move_core_types::identifier::IdentStr;
 use move_idl_types::{IDLModule, IDLStruct};
 use move_model::{
-    model::{FunctionVisibility, GlobalEnv, ModuleEnv},
+    model::{GlobalEnv, ModuleEnv},
     ty,
 };
 use std::collections::BTreeMap;
@@ -33,7 +33,7 @@ pub fn generate_idl_for_module(
             let func_ident = IdentStr::new(&func_name).unwrap();
             // only pick up script functions that also have a script-callable signature.
             // and check all arguments have a valid type tag
-            func.visibility() == FunctionVisibility::Script
+            func.is_entry()
                 && script_signature::verify_module_function_signature_by_name(
                     module,
                     func_ident,
