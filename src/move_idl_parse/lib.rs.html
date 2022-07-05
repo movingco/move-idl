@@ -61,7 +61,7 @@
 <span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
 
 <span class="kw">use</span> <span class="ident">anyhow</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">json_cli</span>::{<span class="ident">CliTool</span>, <span class="ident">CliTypedResult</span>};
+<span class="kw">use</span> <span class="ident">clitool::CliTool</span>;
 <span class="kw">use</span> <span class="ident">move_idl::IDLBuilder</span>;
 
 <span class="doccomment">/// Parses a Move workspace into a set of IDLs.</span>
@@ -82,7 +82,7 @@
 
 <span class="attribute">#[<span class="ident">async_trait::async_trait</span>]</span>
 <span class="kw">impl</span> <span class="ident">CliTool</span><span class="op">&lt;</span>()<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">IDLParseTool</span> {
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">execute</span>(<span class="self">self</span>) -&gt; <span class="ident">CliTypedResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">execute</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">idl</span> <span class="op">=</span> <span class="ident">IDLBuilder::load</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">root</span>)<span class="question-mark">?</span>.<span class="ident">gen</span>()<span class="question-mark">?</span>;
 
         <span class="ident">std::fs::create_dir_all</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">out_dir</span>)<span class="question-mark">?</span>;

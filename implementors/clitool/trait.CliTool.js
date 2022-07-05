@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["move_idl_parse"] = [{"text":"impl <a class=\"trait\" href=\"clitool/trait.CliTool.html\" title=\"trait clitool::CliTool\">CliTool</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.61.0/std/primitive.unit.html\">()</a>&gt; for <a class=\"struct\" href=\"move_idl_parse/struct.IDLParseTool.html\" title=\"struct move_idl_parse::IDLParseTool\">IDLParseTool</a>","synthetic":false,"types":["move_idl_parse::IDLParseTool"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
