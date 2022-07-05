@@ -33,7 +33,7 @@ errmapgen = { version = "0.1.0", path = "../errmapgen" }
 module-id = "0.1.4"
 move-bytecode-verifier = "0.1.4"
 move-idl-types = { version = "0.1.0", path = "../move-idl-types" }
-mv-binary-format = "0.1.5"
+mv-binary-format = "0.1.6"
 mv-core-types = "0.1.5"
 mv-model = "0.1.5"
 mv-package = "0.1.5"
