@@ -583,9 +583,9 @@ dependencies = [
 
 [[package]]
 name = "move-bytecode-verifier"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4f54ecb3127c2e1a02520dba17a77c42997730a5bb96271b62a901cfe9709836"
+checksum = "c1c6fce6113b93b7fed56eb4a00718075f81aedf33ca080b336525c561af37da"
 dependencies = [
  "anyhow",
  "mv-binary-format",
