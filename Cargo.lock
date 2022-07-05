@@ -895,9 +895,9 @@ dependencies = [
 
 [[package]]
 name = "mv-package"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "82d0b2d8de9e76988d3da2d74d6cd6252742b05eb92062dc8daee04f4faad50b"
+checksum = "3e6be99cec4ad6395eb5ad93dad73205451f9fc238687226b178b1269fd8f768"
 dependencies = [
  "anyhow",
  "bcs",
