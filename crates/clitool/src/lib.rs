@@ -11,24 +11,21 @@ use clap::Parser;
 use serde::Serialize;
 
 /// A common result to be returned to users
-pub type CliResult = Result<String, String>;
-
-/// A common result to remove need for typing `Result<T, CliError>`
-pub type CliTypedResult<T> = Result<T, Error>;
+pub type UserResult = Result<String, String>;
 
 /// A common trait for all CLI commands to have consistent outputs
 #[async_trait]
 pub trait CliTool<T: Serialize + Send>: Sized + Send + Parser {
     /// Executes the command, returning a command specific type
-    async fn execute(self) -> CliTypedResult<T>;
+    async fn execute(self) -> Result<T>;
 
     /// Executes the command, and serializes it to the common JSON output type
-    async fn execute_serialized(self) -> CliResult {
+    async fn execute_serialized(self) -> UserResult {
         to_common_result(self.execute().await).await
     }
 
     /// Executes the command, and throws away Ok(result) for the string Success
-    async fn execute_serialized_success(self) -> CliResult {
+    async fn execute_serialized_success(self) -> UserResult {
         to_common_success_result(self.execute().await).await
     }
 
@@ -48,7 +45,7 @@ pub trait CliTool<T: Serialize + Send>: Sized + Send + Parser {
 }
 
 /// Convert any successful response to Success
-pub async fn to_common_success_result<T>(result: Result<T>) -> CliResult {
+pub async fn to_common_success_result<T>(result: Result<T>) -> UserResult {
     to_common_result(result.map(|_| "Success")).await
 }
 
@@ -76,24 +73,24 @@ enum ResultWrapper<T> {
     Error(String),
 }
 
-impl<T> From<CliTypedResult<T>> for ResultWrapper<T> {
-    fn from(result: CliTypedResult<T>) -> Self {
+impl<T> From<Result<T>> for ResultWrapper<T> {
+    fn from(result: Result<T>) -> Self {
         match result {
-            CliTypedResult::Ok(inner) => ResultWrapper::Result(inner),
-            CliTypedResult::Err(inner) => ResultWrapper::Error(inner.to_string()),
+            Result::Ok(inner) => ResultWrapper::Result(inner),
+            Result::Err(inner) => ResultWrapper::Error(inner.to_string()),
         }
     }
 }
 
 /// For pretty printing outputs in JSON
-pub async fn to_common_result<T: Serialize>(result: Result<T>) -> CliResult {
+pub async fn to_common_result<T: Serialize>(result: Result<T>) -> UserResult {
     let is_err = result.is_err();
     let result: ResultWrapper<T> = result.into();
     let string = serde_json::to_string_pretty(&result)
         .map_err(|e| format!("could not serialize command output: {}", e))?;
     if is_err {
-        CliResult::Err(string)
+        UserResult::Err(string)
     } else {
-        CliResult::Ok(string)
+        UserResult::Ok(string)
     }
 }

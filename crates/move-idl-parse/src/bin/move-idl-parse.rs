@@ -1,5 +1,5 @@
 use anyhow::*;
-use json_cli::CliTool;
+use clitool::CliTool;
 use move_idl_parse::IDLParseTool;
 
 #[tokio::main]

@@ -2,7 +2,7 @@
 use std::path::PathBuf;
 
 use anyhow::*;
-use json_cli::{CliTool, CliTypedResult};
+use clitool::CliTool;
 use move_idl::IDLBuilder;
 
 /// Parses a Move workspace into a set of IDLs.
@@ -23,7 +23,7 @@ pub struct IDLParseTool {
 
 #[async_trait::async_trait]
 impl CliTool<()> for IDLParseTool {
-    async fn execute(self) -> CliTypedResult<()> {
+    async fn execute(self) -> Result<()> {
         let idl = IDLBuilder::load(&self.root)?.gen()?;
 
         std::fs::create_dir_all(&self.out_dir)?;
