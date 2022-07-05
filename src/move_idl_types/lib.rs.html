@@ -160,6 +160,7 @@
 <span id="155">155</span>
 <span id="156">156</span>
 <span id="157">157</span>
+<span id="158">158</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Rust types for the Move IDL specification.</span>
 
 <span class="kw">use</span> <span class="ident">errmap</span>::{<span class="ident">ErrorDescription</span>, <span class="ident">ErrorMapping</span>};
@@ -246,7 +247,8 @@
     <span class="ident">U128</span>,
     <span class="ident">Address</span>,
     <span class="ident">Signer</span>,
-    <span class="ident">TypeParameter</span>(<span class="ident">u16</span>),
+    <span class="doccomment">/// The number represents the index of the type parameter within the parent struct.</span>
+    <span class="ident">TypeParam</span>(<span class="ident">u16</span>),
 
     <span class="ident">Tuple</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">IDLType</span><span class="op">&gt;</span>),
     <span class="ident">Vector</span>(<span class="ident">Box</span><span class="op">&lt;</span><span class="ident">IDLType</span><span class="op">&gt;</span>),
