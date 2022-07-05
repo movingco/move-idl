@@ -14,15 +14,7 @@ use std::{
 
 pub mod convert;
 pub mod generate;
-
-fn normalize_doc_string(s: &str) -> Option<String> {
-    let trimmed = s.trim();
-    if trimmed.is_empty() {
-        None
-    } else {
-        Some(trimmed.to_string())
-    }
-}
+pub mod utils;
 
 pub struct IDLBuilder {
     package: ResolutionPackage<AccountAddress>,

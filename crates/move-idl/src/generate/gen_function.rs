@@ -7,7 +7,7 @@ use move_model::{
     ty,
 };
 
-use crate::{convert::get_idl_type_for_type, normalize_doc_string};
+use crate::{convert::get_idl_type_for_type, utils::normalize_doc_string};
 
 pub fn generate_idl_for_function(
     env: &GlobalEnv,
