@@ -25,7 +25,7 @@ address32 = [
 [dependencies]
 anyhow = "1.0.42"
 errmap = "0.1.0"
-mv-core-types = "0.1.4"
+mv-core-types = "0.1.6"
 mv-model = "0.1.4"
 serde = { version = "1.0", features = ["derive"] }
 static-address = "0.1"

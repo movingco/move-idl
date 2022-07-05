@@ -25,5 +25,5 @@ address32 = [
 [dependencies]
 errmap = "0.1.4"
 module-id = "0.1.4"
-mv-core-types = "0.1.5"
+mv-core-types = "0.1.6"
 serde = { version = "1.0", features = ["derive"] }
