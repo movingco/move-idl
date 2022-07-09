@@ -40,7 +40,7 @@ impl CliTool<()> for IDLParseTool {
         let modules_dir = &self.out_dir.join("modules");
         std::fs::create_dir_all(modules_dir)?;
         for (name, module_idl) in relevant_modules.iter() {
-            let module_idl_path = &modules_dir.join(&name).with_extension("json");
+            let module_idl_path = &modules_dir.join(name.name()).with_extension("json");
             std::fs::write(module_idl_path, serde_json::to_string_pretty(&module_idl)?)?;
         }
 

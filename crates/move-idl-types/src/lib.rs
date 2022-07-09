@@ -36,11 +36,11 @@ pub struct IDLPackage {
     /// Name of the package.
     pub name: String,
     /// Modules.
-    pub modules: BTreeMap<String, IDLModule>,
+    pub modules: BTreeMap<ModuleIdData, IDLModule>,
     /// Aliases of addresses.
     pub aliases: BTreeMap<String, AccountAddress>,
     /// Dependent modules.
-    pub dependencies: BTreeMap<String, IDLModule>,
+    pub dependencies: BTreeMap<ModuleIdData, IDLModule>,
     /// Error map.
     pub errors: ErrorMapping,
     /// All structs.

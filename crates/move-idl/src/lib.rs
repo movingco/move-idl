@@ -3,6 +3,7 @@
 use anyhow::*;
 use errmapgen::{ErrmapGen, ErrmapOptions};
 use generate::gen_module::{generate_idl_for_module, generate_idl_structs_for_module};
+use module_id::ModuleIdData;
 use move_core_types::{account_address::AccountAddress, language_storage::ModuleId};
 pub use move_idl_types::*;
 use move_model::model::GlobalEnv;
@@ -89,8 +90,8 @@ impl IDLBuilder {
             .map(|m| m.get_verified_module().self_id())
             .collect();
 
-        let mut modules: BTreeMap<String, IDLModule> = BTreeMap::new();
-        let mut dependencies: BTreeMap<String, IDLModule> = BTreeMap::new();
+        let mut modules: BTreeMap<ModuleIdData, IDLModule> = BTreeMap::new();
+        let mut dependencies: BTreeMap<ModuleIdData, IDLModule> = BTreeMap::new();
         for module in self.env_all_targets.get_modules() {
             if !relevant_module_ids.contains(&module.get_verified_module().self_id()) {
                 continue;
@@ -102,9 +103,9 @@ impl IDLBuilder {
             let idl =
                 generate_idl_for_module(&self.env_all_targets, &error_mapping, module.clone())?;
             if module.is_target() {
-                modules.insert(idl.module_id.to_string(), idl);
+                modules.insert(idl.module_id.clone(), idl);
             } else {
-                dependencies.insert(idl.module_id.to_string(), idl);
+                dependencies.insert(idl.module_id.clone(), idl);
             }
         }
 
