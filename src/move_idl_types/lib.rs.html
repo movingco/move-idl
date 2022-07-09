@@ -160,7 +160,6 @@
 <span id="155">155</span>
 <span id="156">156</span>
 <span id="157">157</span>
-<span id="158">158</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Rust types for the Move IDL specification.</span>
 
 <span class="kw">use</span> <span class="ident">errmap</span>::{<span class="ident">ErrorDescription</span>, <span class="ident">ErrorMapping</span>};
@@ -168,6 +167,7 @@
 <span class="kw">use</span> <span class="ident">move_core_types::account_address::AccountAddress</span>;
 <span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
 <span class="kw">use</span> <span class="ident">std::collections</span>::{<span class="ident">BTreeMap</span>, <span class="ident">BTreeSet</span>};
+<span class="kw">use</span> <span class="ident">struct_tag::StructTagData</span>;
 
 <span class="doccomment">/// IDL error.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
@@ -212,10 +212,8 @@
 <span class="doccomment">/// A struct with types.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IDLStructType</span> {
-    <span class="doccomment">/// Module ID.</span>
-    <span class="kw">pub</span> <span class="ident">module_id</span>: <span class="ident">ModuleIdData</span>,
-    <span class="doccomment">/// Name of the struct.</span>
-    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
+    <span class="doccomment">/// Fully qualified name of the struct.</span>
+    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">StructTagData</span>,
     <span class="doccomment">/// Type arguments of the struct, if applicable.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Vec::is_empty&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">ty_args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">IDLType</span><span class="op">&gt;</span>,
@@ -276,13 +274,12 @@
 <span class="doccomment">/// A struct.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IDLStruct</span> {
-    <span class="doccomment">/// ID of the module.</span>
-    <span class="kw">pub</span> <span class="ident">module_id</span>: <span class="ident">ModuleIdData</span>,
-    <span class="doccomment">/// Name of the struct.</span>
-    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
+    <span class="doccomment">/// Fully qualified name of the struct.</span>
+    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">StructTagData</span>,
     <span class="doccomment">/// Documentation.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">doc</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// List of struct fields.</span>
     <span class="kw">pub</span> <span class="ident">fields</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">IDLField</span><span class="op">&gt;</span>,
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Vec::is_empty&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">type_params</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
@@ -304,6 +301,7 @@
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IDLArgument</span> {
+    <span class="doccomment">/// Name of the argument.</span>
     <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
     <span class="doccomment">/// Type of the argument.</span>
     <span class="kw">pub</span> <span class="ident">ty</span>: <span class="ident">IDLType</span>,
