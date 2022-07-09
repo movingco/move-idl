@@ -90,10 +90,18 @@ impl IDLBuilder {
             .map(|m| m.get_verified_module().self_id())
             .collect();
 
+        let target_module_ids: HashSet<ModuleId> = self
+            .env
+            .get_target_modules()
+            .iter()
+            .map(|m| m.get_verified_module().self_id())
+            .collect();
+
         let mut modules: BTreeMap<ModuleIdData, IDLModule> = BTreeMap::new();
         let mut dependencies: BTreeMap<ModuleIdData, IDLModule> = BTreeMap::new();
         for module in self.env_all_targets.get_modules() {
-            if !relevant_module_ids.contains(&module.get_verified_module().self_id()) {
+            let module_id = module.get_verified_module().self_id();
+            if !relevant_module_ids.contains(&module_id) {
                 continue;
             }
             if module.is_script_module() {
@@ -102,7 +110,7 @@ impl IDLBuilder {
 
             let idl =
                 generate_idl_for_module(&self.env_all_targets, &error_mapping, module.clone())?;
-            if module.is_target() {
+            if target_module_ids.contains(&module_id) {
                 modules.insert(idl.module_id.clone(), idl);
             } else {
                 dependencies.insert(idl.module_id.clone(), idl);
