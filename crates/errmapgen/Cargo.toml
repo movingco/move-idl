@@ -1,6 +1,6 @@
 [package]
 name = "errmapgen"
-version = "0.2.1"
+version = "0.2.2"
 description = "Move JSON error map generator."
 homepage = "https://moving.wtf"
 repository = "https://github.com/movingco/move-idl"

@@ -1,6 +1,6 @@
 [package]
 name = "clitool"
-version = "0.2.1"
+version = "0.2.2"
 description = "Helpers for creating CLIs with serializable JSON output."
 homepage = "https://moving.wtf"
 repository = "https://github.com/movingco/move-idl"
