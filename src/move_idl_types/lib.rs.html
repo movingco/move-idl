@@ -198,11 +198,11 @@
     <span class="doccomment">/// Name of the package.</span>
     <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
     <span class="doccomment">/// Modules.</span>
-    <span class="kw">pub</span> <span class="ident">modules</span>: <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">IDLModule</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">modules</span>: <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">ModuleIdData</span>, <span class="ident">IDLModule</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Aliases of addresses.</span>
     <span class="kw">pub</span> <span class="ident">aliases</span>: <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">AccountAddress</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Dependent modules.</span>
-    <span class="kw">pub</span> <span class="ident">dependencies</span>: <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">IDLModule</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">dependencies</span>: <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">ModuleIdData</span>, <span class="ident">IDLModule</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Error map.</span>
     <span class="kw">pub</span> <span class="ident">errors</span>: <span class="ident">ErrorMapping</span>,
     <span class="doccomment">/// All structs.</span>
