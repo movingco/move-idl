@@ -168,7 +168,7 @@ dependencies = [
 
 [[package]]
 name = "clitool"
-version = "0.1.5"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -330,7 +330,7 @@ dependencies = [
 
 [[package]]
 name = "errmapgen"
-version = "0.1.5"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "errmap",
@@ -633,7 +633,7 @@ dependencies = [
 
 [[package]]
 name = "move-idl"
-version = "0.1.5"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "errmapgen",
@@ -650,7 +650,7 @@ dependencies = [
 
 [[package]]
 name = "move-idl-parse"
-version = "0.1.5"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -663,7 +663,7 @@ dependencies = [
 
 [[package]]
 name = "move-idl-types"
-version = "0.1.5"
+version = "0.2.0"
 dependencies = [
  "errmap",
  "module-id",

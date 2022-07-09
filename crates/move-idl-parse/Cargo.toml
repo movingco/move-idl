@@ -1,6 +1,6 @@
 [package]
 name = "move-idl-parse"
-version = "0.1.5"
+version = "0.2.0"
 description = "CLI for parsing an IDL from a Move package."
 homepage = "https://moving.wtf"
 repository = "https://github.com/movingco/move-idl"
@@ -18,8 +18,8 @@ address32 = ["move-idl/address32"]
 anyhow = "1.0.42"
 async-trait = "0.1.56"
 clap = { version = "3.2", features = ["derive"] }
-clitool = { version = "0.1.0", path = "../clitool" }
-move-idl = { version = "0.1.0", path = "../move-idl" }
+clitool = { version = "0.2.0", path = "../clitool" }
+move-idl = { version = "0.2.0", path = "../move-idl" }
 serde_json = "1.0.81"
 tokio = { version = "1.18.2", features = ["full"] }
 
