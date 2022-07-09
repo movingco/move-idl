@@ -1,6 +1,6 @@
 [package]
 name = "move-idl"
-version = "0.2.0"
+version = "0.2.1"
 description = "Move IDL"
 homepage = "https://moving.wtf"
 repository = "https://github.com/movingco/move-idl"
