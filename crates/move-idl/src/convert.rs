@@ -1,7 +1,10 @@
 //! Conversion utilities.
 
 use anyhow::*;
-use move_core_types::language_storage::TypeTag;
+use move_core_types::{
+    identifier::Identifier,
+    language_storage::{StructTag, TypeTag},
+};
 pub use move_idl_types::*;
 use move_model::{
     model::GlobalEnv,
@@ -70,12 +73,20 @@ pub fn get_idl_type_for_type(env: &GlobalEnv, ty: &Type) -> Result<IDLType> {
             let (struct_env, _) = ty
                 .get_struct(env)
                 .ok_or_else(|| anyhow!("struct could not be found"))?;
+            let module_id = &struct_env.module_env.get_verified_module().self_id();
             IDLType::Struct(IDLStructType {
-                module_id: struct_env.module_env.get_verified_module().self_id().into(),
-                name: struct_env
-                    .get_name()
-                    .display(struct_env.symbol_pool())
-                    .to_string(),
+                name: StructTag {
+                    address: *module_id.address(),
+                    module: module_id.name().to_owned(),
+                    name: Identifier::new(
+                        struct_env
+                            .get_name()
+                            .display(struct_env.symbol_pool())
+                            .to_string(),
+                    )?,
+                    type_params: vec![],
+                }
+                .into(),
                 ty_args: ty_args
                     .iter()
                     .map(|tp| get_idl_type_for_type(env, tp))

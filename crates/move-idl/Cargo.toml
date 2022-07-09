@@ -19,18 +19,23 @@ default = []
 address20 = [
     "errmapgen/address20",
     "mv-core-types/address20",
-    "move-idl-types/address20"
+    "move-idl-types/address20",
+    "module-id/address20",
+    "struct-tag/address20",
 ]
 address32 = [
     "errmapgen/address32",
     "mv-core-types/address32",
-    "move-idl-types/address32"
+    "move-idl-types/address32",
+    "module-id/address32",
+    "struct-tag/address32",
 ]
 
 [dependencies]
 anyhow = "1.0.42"
 errmapgen = { version = "0.1.0", path = "../errmapgen" }
 module-id = "0.1.4"
+struct-tag = "0.1.4"
 move-bytecode-verifier = "0.1.6"
 move-idl-types = { version = "0.1.0", path = "../move-idl-types" }
 mv-binary-format = "0.1.6"

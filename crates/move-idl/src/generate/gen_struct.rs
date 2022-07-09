@@ -2,6 +2,7 @@
 
 use anyhow::*;
 use move_binary_format::file_format::Ability;
+use move_core_types::{identifier::Identifier, language_storage::StructTag};
 use move_idl_types::{IDLAbility, IDLField, IDLStruct};
 use move_model::model::{GlobalEnv, StructEnv};
 
@@ -26,9 +27,16 @@ pub fn generate_idl_for_struct(env: &GlobalEnv, struct_env: &StructEnv) -> Resul
         .map(|tp| symbol_pool.string(tp.0).to_string())
         .collect();
 
+    let module_id = &struct_env.module_env.get_verified_module().self_id();
+
     Ok(IDLStruct {
-        module_id: struct_env.module_env.get_verified_module().self_id().into(),
-        name: symbol_pool.string(struct_env.get_name()).to_string(),
+        name: StructTag {
+            address: *module_id.address(),
+            module: module_id.name().to_owned(),
+            name: Identifier::new(symbol_pool.string(struct_env.get_name()).to_string())?,
+            type_params: vec![],
+        }
+        .into(),
         doc: normalize_doc_string(struct_env.get_doc()),
         fields,
         type_params,

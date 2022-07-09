@@ -5,6 +5,7 @@ use module_id::ModuleIdData;
 use move_core_types::account_address::AccountAddress;
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet};
+use struct_tag::StructTagData;
 
 /// IDL error.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -49,10 +50,8 @@ pub struct IDLPackage {
 /// A struct with types.
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct IDLStructType {
-    /// Module ID.
-    pub module_id: ModuleIdData,
-    /// Name of the struct.
-    pub name: String,
+    /// Fully qualified name of the struct.
+    pub name: StructTagData,
     /// Type arguments of the struct, if applicable.
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub ty_args: Vec<IDLType>,
@@ -113,13 +112,12 @@ pub enum IDLAbility {
 /// A struct.
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct IDLStruct {
-    /// ID of the module.
-    pub module_id: ModuleIdData,
-    /// Name of the struct.
-    pub name: String,
+    /// Fully qualified name of the struct.
+    pub name: StructTagData,
     /// Documentation.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub doc: Option<String>,
+    /// List of struct fields.
     pub fields: Vec<IDLField>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub type_params: Vec<String>,
@@ -141,6 +139,7 @@ pub struct IDLField {
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct IDLArgument {
+    /// Name of the argument.
     pub name: String,
     /// Type of the argument.
     pub ty: IDLType,

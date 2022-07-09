@@ -645,6 +645,7 @@ dependencies = [
  "mv-model",
  "mv-package",
  "serde 1.0.138",
+ "struct-tag",
 ]
 
 [[package]]
@@ -668,6 +669,7 @@ dependencies = [
  "module-id",
  "mv-core-types",
  "serde 1.0.138",
+ "struct-tag",
 ]
 
 [[package]]
@@ -1543,6 +1545,17 @@ name = "strsim"
 version = "0.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "73473c0e59e6d5812c5dfe2a064a6444949f089e20eec9a2e5506596494e4623"
+
+[[package]]
+name = "struct-tag"
+version = "0.1.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bd184c953c224262486a531464199d0522544d410f195beeed7d2f5aa9729947"
+dependencies = [
+ "anyhow",
+ "mv-core-types",
+ "serde 1.0.138",
+]
 
 [[package]]
 name = "syn"
