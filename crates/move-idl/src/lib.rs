@@ -25,15 +25,16 @@ pub struct IDLBuilder {
 }
 
 impl IDLBuilder {
-    /// # Arguments
-    /// - `generate_all_targets` - If true, rich IDLs will be generated for dependencies in addition to the module.
     pub fn load(root_path: &Path) -> Result<IDLBuilder> {
         let build_config = BuildConfig {
             generate_docs: true,
             generate_abis: true,
             ..Default::default()
         };
+        Self::load_with_config(root_path, build_config)
+    }
 
+    pub fn load_with_config(root_path: &Path, build_config: BuildConfig) -> Result<IDLBuilder> {
         let resolution_graph = &build_config
             .clone()
             .resolution_graph_for_package(root_path)?;
