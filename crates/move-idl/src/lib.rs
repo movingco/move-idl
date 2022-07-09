@@ -72,9 +72,6 @@ impl IDLBuilder {
     /// Generates IDLs for all script modules in the environment (excluding the dependency set).
     pub fn gen(&self) -> Result<IDLPackage> {
         let aliases = self.gen_aliases();
-        let mut modules: BTreeMap<String, IDLModule> = BTreeMap::new();
-
-        let mut dependencies: BTreeMap<String, IDLModule> = BTreeMap::new();
 
         let error_mapping =
             ErrmapGen::new(&self.env_all_targets, &ErrmapOptions::default()).gen()?;
@@ -92,6 +89,8 @@ impl IDLBuilder {
             .map(|m| m.get_verified_module().self_id())
             .collect();
 
+        let mut modules: BTreeMap<String, IDLModule> = BTreeMap::new();
+        let mut dependencies: BTreeMap<String, IDLModule> = BTreeMap::new();
         for module in self.env_all_targets.get_modules() {
             if !relevant_module_ids.contains(&module.get_verified_module().self_id()) {
                 continue;
@@ -103,9 +102,9 @@ impl IDLBuilder {
             let idl =
                 generate_idl_for_module(&self.env_all_targets, &error_mapping, module.clone())?;
             if module.is_target() {
-                modules.insert(idl.module_id.name().to_string(), idl);
+                modules.insert(idl.module_id.to_string(), idl);
             } else {
-                dependencies.insert(idl.module_id.name().to_string(), idl);
+                dependencies.insert(idl.module_id.to_string(), idl);
             }
         }
 
