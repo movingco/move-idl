@@ -6,7 +6,7 @@ pub fn normalize_doc_string(s: &str) -> Option<String> {
     if trimmed.is_empty() {
         None
     } else {
-        Some(normalize_indentation(s))
+        Some(remove_asterisks_if_asterisk_docs(&normalize_indentation(s)))
     }
 }
 
@@ -33,5 +33,24 @@ pub fn normalize_indentation(string: &str) -> String {
             .map(|l| l.trim_end())
             .collect::<Vec<_>>()
             .join("\n")
+    }
+}
+
+/// Remove asterisks if the doc string is formatted with asterisks.
+pub fn remove_asterisks_if_asterisk_docs(s: &str) -> String {
+    let should_remove_asterisks = s.lines().all(|l| l.is_empty() || l.starts_with("* "));
+    if should_remove_asterisks {
+        s.lines()
+            .map(|line| {
+                if let Some(fmt) = line.strip_prefix("* ") {
+                    fmt
+                } else {
+                    line
+                }
+            })
+            .collect::<Vec<_>>()
+            .join("\n")
+    } else {
+        s.to_string()
     }
 }
