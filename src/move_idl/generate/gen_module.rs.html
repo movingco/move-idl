@@ -112,9 +112,11 @@
 <span id="107">107</span>
 <span id="108">108</span>
 <span id="109">109</span>
+<span id="110">110</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Generates the IDL for a module.</span>
 
 <span class="kw">use</span> <span class="ident">anyhow</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">docstring::normalize_doc_string</span>;
 <span class="kw">use</span> <span class="ident">errmapgen</span>::{<span class="ident">ErrorDescription</span>, <span class="ident">ErrorMapping</span>};
 <span class="kw">use</span> <span class="ident">module_id::ModuleIdData</span>;
 <span class="kw">use</span> <span class="ident">move_bytecode_verifier::script_signature</span>;
@@ -128,7 +130,7 @@
 
 <span class="kw">use</span> <span class="ident">move_idl_types::IDLError</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">convert::get_type_tag_for_type</span>, <span class="ident">utils::normalize_doc_string</span>};
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::convert::get_type_tag_for_type</span>;
 
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">gen_function::generate_idl_for_function</span>, <span class="ident">gen_struct::generate_idl_for_struct</span>};
 
@@ -216,7 +218,7 @@
     <span class="prelude-val">Ok</span>(<span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Some</span>(<span class="ident">result</span>) =&gt; <span class="ident">result</span>
             .<span class="ident">iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">k</span>, <span class="ident">v</span>)<span class="op">|</span> -&gt; (<span class="ident">u64</span>, <span class="ident">IDLError</span>) { (<span class="kw-2">*</span><span class="ident">k</span>, <span class="ident">v</span>.<span class="ident">into</span>()) })
+            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">k</span>, <span class="ident">v</span>)<span class="op">|</span> -&gt; (<span class="ident">u64</span>, <span class="ident">IDLError</span>) { (<span class="kw-2">*</span><span class="ident">k</span>, <span class="ident">v</span>.<span class="ident">clone</span>().<span class="ident">into</span>()) })
             .<span class="ident">collect</span>(),
         <span class="prelude-val">None</span> =&gt; <span class="ident">BTreeMap::new</span>(),
     })
