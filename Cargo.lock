@@ -312,6 +312,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "docstring"
+version = "0.2.2"
+
+[[package]]
 name = "either"
 version = "1.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -333,6 +337,7 @@ name = "errmapgen"
 version = "0.2.2"
 dependencies = [
  "anyhow",
+ "docstring",
  "errmap",
  "mv-core-types",
  "mv-model",
@@ -636,6 +641,7 @@ name = "move-idl"
 version = "0.2.2"
 dependencies = [
  "anyhow",
+ "docstring",
  "errmapgen",
  "module-id",
  "move-bytecode-verifier",

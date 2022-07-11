@@ -1,13 +1,14 @@
 //! Generates the IDL for a function.
 
 use anyhow::*;
+use docstring::normalize_doc_string;
 use move_idl_types::{IDLArgument, IDLScriptFunction};
 use move_model::{
     model::{FunctionEnv, GlobalEnv, ModuleEnv},
     ty,
 };
 
-use crate::{convert::get_idl_type_for_type, utils::normalize_doc_string};
+use crate::convert::get_idl_type_for_type;
 
 pub fn generate_idl_for_function(
     env: &GlobalEnv,

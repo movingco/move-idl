@@ -1,12 +1,13 @@
 //! Generates the IDL for a struct.
 
 use anyhow::*;
+use docstring::normalize_doc_string;
 use move_binary_format::file_format::Ability;
 use move_core_types::{identifier::Identifier, language_storage::StructTag};
 use move_idl_types::{IDLAbility, IDLField, IDLStruct};
 use move_model::model::{GlobalEnv, StructEnv};
 
-use crate::{convert::get_idl_type_for_type, utils::normalize_doc_string};
+use crate::convert::get_idl_type_for_type;
 
 pub fn generate_idl_for_struct(env: &GlobalEnv, struct_env: &StructEnv) -> Result<IDLStruct> {
     let symbol_pool = env.symbol_pool();

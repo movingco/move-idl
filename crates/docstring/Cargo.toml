@@ -1,0 +1,10 @@
+[package]
+name = "docstring"
+version = "0.2.2"
+description = "Utilities for manipulating and parsing documentation strings."
+homepage = "https://moving.wtf"
+repository = "https://github.com/movingco/move-idl"
+authors = ["Ian Macalinao <ian@moving.wtf>"]
+license = "Apache-2.0"
+edition = "2021"
+keywords = ["documentation"]

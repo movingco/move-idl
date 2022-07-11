@@ -15,7 +15,6 @@ use std::{
 
 pub mod convert;
 pub mod generate;
-pub mod utils;
 
 pub struct IDLBuilder {
     package: ResolutionPackage<AccountAddress>,

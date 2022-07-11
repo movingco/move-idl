@@ -5,9 +5,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::{bail, Result};
+use docstring::normalize_doc_string;
 pub use errmap::*;
 use move_core_types::{
-    account_address::AccountAddress, identifier::Identifier, language_storage::ModuleId,
+    account_address::AccountAddress, ident_str, identifier::Identifier, language_storage::ModuleId,
 };
 use move_model::{
     ast::Value,
@@ -31,7 +32,7 @@ impl Default for ErrmapOptions {
             error_prefix: "E".to_string(),
             error_category_module: ModuleId::new(
                 static_address::static_address!("0x1"),
-                Identifier::new("Errors").unwrap(),
+                ident_str!("Errors").to_owned(),
             ),
         }
     }
@@ -137,7 +138,8 @@ impl<'env> ErrmapGen<'env> {
                 error_category,
                 ErrorDescription {
                     code_name: name.to_string(),
-                    code_description: named_constant.get_doc().trim().to_string(),
+                    code_description: normalize_doc_string(named_constant.get_doc())
+                        .unwrap_or_default(),
                 },
             )?
         }
@@ -158,7 +160,8 @@ impl<'env> ErrmapGen<'env> {
                     abort_code,
                     ErrorDescription {
                         code_name: name.to_string(),
-                        code_description: named_constant.get_doc().trim().to_string(),
+                        code_description: normalize_doc_string(named_constant.get_doc())
+                            .unwrap_or_default(),
                     },
                 )?
             }

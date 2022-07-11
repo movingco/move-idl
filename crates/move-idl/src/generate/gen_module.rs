@@ -1,6 +1,7 @@
 //! Generates the IDL for a module.
 
 use anyhow::*;
+use docstring::normalize_doc_string;
 use errmapgen::{ErrorDescription, ErrorMapping};
 use module_id::ModuleIdData;
 use move_bytecode_verifier::script_signature;
@@ -14,7 +15,7 @@ use std::collections::BTreeMap;
 
 use move_idl_types::IDLError;
 
-use crate::{convert::get_type_tag_for_type, utils::normalize_doc_string};
+use crate::convert::get_type_tag_for_type;
 
 use super::{gen_function::generate_idl_for_function, gen_struct::generate_idl_for_struct};
 

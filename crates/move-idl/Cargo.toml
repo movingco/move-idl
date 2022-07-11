@@ -33,6 +33,7 @@ address32 = [
 
 [dependencies]
 anyhow = "1.0.42"
+docstring = { version = "0.2.2", path = "../docstring" }
 errmapgen = { version = "0.2.0", path = "../errmapgen" }
 module-id = "0.1.4"
 struct-tag = "0.1.4"
