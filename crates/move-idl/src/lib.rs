@@ -123,7 +123,7 @@ impl IDLBuilder {
             modules,
             aliases,
             structs,
-            errors: error_mapping,
+            errors: error_mapping.into(),
             dependencies,
         })
     }

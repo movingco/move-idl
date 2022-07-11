@@ -1,34 +1,13 @@
 //! Rust types for the Move IDL specification.
 
-use errmap::{ErrorDescription, ErrorMapping};
+mod error;
+pub use error::*;
+
 use module_id::ModuleIdData;
 use move_core_types::account_address::AccountAddress;
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet};
 use struct_tag::StructTagData;
-
-/// IDL error.
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct IDLError {
-    /// The constant name of error e.g., ECANT_PAY_DEPOSIT
-    pub name: String,
-    /// The code description. This is generated from the doc comments on the constant.
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub doc: Option<String>,
-}
-
-impl From<&ErrorDescription> for IDLError {
-    fn from(desc: &ErrorDescription) -> Self {
-        IDLError {
-            name: desc.code_name.clone(),
-            doc: if desc.code_description.is_empty() {
-                None
-            } else {
-                Some(desc.code_description.clone())
-            },
-        }
-    }
-}
 
 /// A set of modules.
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -42,7 +21,7 @@ pub struct IDLPackage {
     /// Dependent modules.
     pub dependencies: BTreeMap<ModuleIdData, IDLModule>,
     /// Error map.
-    pub errors: ErrorMapping,
+    pub errors: IDLErrorMapping,
     /// All structs.
     pub structs: Vec<IDLStruct>,
 }

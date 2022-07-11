@@ -102,7 +102,7 @@ pub fn generate_idl_errors_for_module(
     Ok(match result {
         Some(result) => result
             .iter()
-            .map(|(k, v)| -> (u64, IDLError) { (*k, v.into()) })
+            .map(|(k, v)| -> (u64, IDLError) { (*k, v.clone().into()) })
             .collect(),
         None => BTreeMap::new(),
     })
