@@ -88,6 +88,20 @@ pub enum IDLAbility {
     Key = 0x8,
 }
 
+fn is_false(b: impl std::borrow::Borrow<bool>) -> bool {
+    !b.borrow()
+}
+
+/// A struct type parameter.
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
+pub struct IDLTypeParam {
+    /// Name of the parameter.
+    pub name: String,
+    /// Whether or not this parameter is a phantom type.
+    #[serde(skip_serializing_if = "is_false")]
+    pub is_phantom: bool,
+}
+
 /// A struct.
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct IDLStruct {
@@ -99,7 +113,7 @@ pub struct IDLStruct {
     /// List of struct fields.
     pub fields: Vec<IDLField>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
-    pub type_params: Vec<String>,
+    pub type_params: Vec<IDLTypeParam>,
     /// Abilities.
     pub abilities: BTreeSet<IDLAbility>,
 }

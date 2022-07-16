@@ -4,7 +4,7 @@ use anyhow::*;
 use docstring::normalize_doc_string;
 use move_binary_format::file_format::Ability;
 use move_core_types::{identifier::Identifier, language_storage::StructTag};
-use move_idl_types::{IDLAbility, IDLField, IDLStruct};
+use move_idl_types::{IDLAbility, IDLField, IDLStruct, IDLTypeParam};
 use move_model::model::{GlobalEnv, StructEnv};
 
 use crate::convert::get_idl_type_for_type;
@@ -22,10 +22,14 @@ pub fn generate_idl_for_struct(env: &GlobalEnv, struct_env: &StructEnv) -> Resul
         })
         .collect::<Result<Vec<_>>>()?;
 
-    let type_params: Vec<String> = struct_env
+    let type_params: Vec<IDLTypeParam> = struct_env
         .get_named_type_parameters()
         .iter()
-        .map(|tp| symbol_pool.string(tp.0).to_string())
+        .enumerate()
+        .map(|(i, tp)| IDLTypeParam {
+            name: symbol_pool.string(tp.0).to_string(),
+            is_phantom: struct_env.is_phantom_parameter(i),
+        })
         .collect();
 
     let module_id = &struct_env.module_env.get_verified_module().self_id();
