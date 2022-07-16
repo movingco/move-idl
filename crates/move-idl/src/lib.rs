@@ -1,5 +1,6 @@
 //! Move IDL generator.
 
+use account_address::AccountAddressData;
 use anyhow::*;
 use errmapgen::{ErrmapGen, ErrmapOptions};
 use generate::gen_module::{generate_idl_for_module, generate_idl_structs_for_module};
@@ -62,11 +63,11 @@ impl IDLBuilder {
         })
     }
 
-    fn gen_aliases(&self) -> BTreeMap<String, AccountAddress> {
+    fn gen_aliases(&self) -> BTreeMap<String, AccountAddressData> {
         self.package
             .resolution_table
             .iter()
-            .map(|(k, v)| (k.as_str().to_string(), *v))
+            .map(|(k, v)| (k.as_str().to_string(), (*v).into()))
             .collect()
     }
 

@@ -2,10 +2,11 @@ use std::collections::BTreeMap;
 
 use errmap::{ErrorDescription, ErrorMapping};
 use module_id::ModuleIdData;
+use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 /// IDL error mapping.
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 pub struct IDLErrorMapping {
     /// The set of error categories and their descriptions
     pub error_categories: BTreeMap<u64, IDLError>,
@@ -36,7 +37,7 @@ impl From<ErrorMapping> for IDLErrorMapping {
 }
 
 /// IDL error.
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 pub struct IDLError {
     /// The constant name of error e.g., ECANT_PAY_DEPOSIT
     pub name: String,

@@ -1,23 +1,24 @@
 //! Rust types for the Move IDL specification.
 
 mod error;
+use account_address::AccountAddressData;
 pub use error::*;
 
 use module_id::ModuleIdData;
-use move_core_types::account_address::AccountAddress;
+use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet};
 use struct_tag::StructTagData;
 
 /// A set of modules.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
 pub struct IDLPackage {
     /// Name of the package.
     pub name: String,
     /// Modules.
     pub modules: BTreeMap<ModuleIdData, IDLModule>,
     /// Aliases of addresses.
-    pub aliases: BTreeMap<String, AccountAddress>,
+    pub aliases: BTreeMap<String, AccountAddressData>,
     /// Dependent modules.
     pub dependencies: BTreeMap<ModuleIdData, IDLModule>,
     /// Error map.
@@ -27,22 +28,22 @@ pub struct IDLPackage {
 }
 
 /// A struct with types.
-#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq, JsonSchema)]
 pub struct IDLStructType {
     /// Fully qualified name of the struct.
     pub name: StructTagData,
     /// Type arguments of the struct, if applicable.
-    #[serde(skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub ty_args: Vec<IDLType>,
 }
 
 /// Simplified ABI for a Move module.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
 pub struct IDLModule {
     /// The module name and address.
     pub module_id: ModuleIdData,
     /// Documentation.
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub doc: Option<String>,
     /// Functions.
     pub functions: Vec<IDLScriptFunction>,
@@ -53,7 +54,7 @@ pub struct IDLModule {
 }
 
 /// A type represented in the IDL.
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum IDLType {
     Bool,
@@ -72,7 +73,9 @@ pub enum IDLType {
 
 /// An `Ability` classifies what operations are permitted for a given type
 #[repr(u8)]
-#[derive(Debug, Clone, Eq, Copy, Hash, Ord, PartialEq, PartialOrd, Serialize, Deserialize)]
+#[derive(
+    Debug, Clone, Eq, Copy, Hash, Ord, PartialEq, PartialOrd, Serialize, Deserialize, JsonSchema,
+)]
 #[serde(rename_all = "snake_case")]
 pub enum IDLAbility {
     /// Allows values of types with this ability to be copied, via CopyLoc or ReadRef
@@ -93,44 +96,44 @@ fn is_false(b: impl std::borrow::Borrow<bool>) -> bool {
 }
 
 /// A struct type parameter.
-#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, JsonSchema)]
 pub struct IDLTypeParam {
     /// Name of the parameter.
     pub name: String,
     /// Whether or not this parameter is a phantom type.
-    #[serde(skip_serializing_if = "is_false")]
+    #[serde(default, skip_serializing_if = "is_false")]
     pub is_phantom: bool,
 }
 
 /// A struct.
-#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, JsonSchema)]
 pub struct IDLStruct {
     /// Fully qualified name of the struct.
     pub name: StructTagData,
     /// Documentation.
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub doc: Option<String>,
     /// List of struct fields.
     pub fields: Vec<IDLField>,
-    #[serde(skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub type_params: Vec<IDLTypeParam>,
     /// Abilities.
     pub abilities: BTreeSet<IDLAbility>,
 }
 
 /// A struct.
-#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, JsonSchema)]
 pub struct IDLField {
     /// Name of the field.
     pub name: String,
     /// Documentation.
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub doc: Option<String>,
     /// Type of the IDL field.
     pub ty: IDLType,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
 pub struct IDLArgument {
     /// Name of the argument.
     pub name: String,
@@ -138,12 +141,12 @@ pub struct IDLArgument {
     pub ty: IDLType,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
 pub struct IDLScriptFunction {
     /// Name of the script function.
     pub name: String,
     /// Documentation for the script function.
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub doc: Option<String>,
     pub ty_args: Vec<String>,
     pub args: Vec<IDLArgument>,

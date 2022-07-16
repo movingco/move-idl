@@ -18,6 +18,7 @@ path = "src/lib.rs"
 default = []
 address20 = [
     "errmapgen/address20",
+    "account-address/address20",
     "mv-core-types/address20",
     "move-idl-types/address20",
     "module-id/address20",
@@ -25,6 +26,7 @@ address20 = [
 ]
 address32 = [
     "errmapgen/address32",
+    "account-address/address32",
     "mv-core-types/address32",
     "move-idl-types/address32",
     "module-id/address32",
@@ -33,6 +35,7 @@ address32 = [
 
 [dependencies]
 anyhow = "1.0.42"
+account-address = "0.1.6"
 docstring = { version = "0.2.2", path = "../docstring" }
 errmapgen = { version = "0.2.0", path = "../errmapgen" }
 module-id = "0.1.4"

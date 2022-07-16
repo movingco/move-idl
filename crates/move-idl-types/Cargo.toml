@@ -14,17 +14,20 @@ default = []
 address20 = [
     "errmap/address20",
     "module-id/address20",
-    "mv-core-types/address20"
+    "struct-tag/address20",
+    "account-address/address20",
 ]
 address32 = [
     "errmap/address32",
+    "account-address/address32",
+    "struct-tag/address32",
     "module-id/address32",
-    "mv-core-types/address32"
 ]
 
 [dependencies]
 errmap = "0.1.4"
+account-address = "0.1.4"
 module-id = "0.1.4"
 struct-tag = "0.1.4"
-mv-core-types = "0.1.5"
 serde = { version = "1.0", features = ["derive"] }
+schemars = "0.8"
