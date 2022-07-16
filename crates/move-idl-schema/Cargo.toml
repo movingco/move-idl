@@ -1,6 +1,6 @@
 [package]
 name = "move-idl-schema"
-version = "0.2.3"
+version = "0.3.0"
 description = "Rust types for the Move IDL specification."
 homepage = "https://moving.wtf"
 repository = "https://github.com/movingco/move-idl"
@@ -20,4 +20,4 @@ clap = { version = "3.2", features = ["derive"] }
 schemars = "0.8"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1"
-move-idl = { version = "0.2", path = "../move-idl" }
+move-idl = { version = "0.3.0", path = "../move-idl" }
