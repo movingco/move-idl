@@ -3,10 +3,9 @@
 use anyhow::*;
 use docstring::normalize_doc_string;
 use errmapgen::{ErrorDescription, ErrorMapping};
-use module_id::ModuleIdData;
 use move_bytecode_verifier::script_signature;
 use move_core_types::identifier::IdentStr;
-use move_idl_types::{IDLModule, IDLStruct};
+use move_idl_types::*;
 use move_model::{
     model::{GlobalEnv, ModuleEnv},
     ty,

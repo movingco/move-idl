@@ -18,32 +18,26 @@ path = "src/lib.rs"
 default = []
 address20 = [
     "errmapgen/address20",
-    "account-address/address20",
-    "mv-core-types/address20",
+    "move-core-types/address20",
     "move-idl-types/address20",
-    "module-id/address20",
     "struct-tag/address20",
 ]
 address32 = [
     "errmapgen/address32",
-    "account-address/address32",
-    "mv-core-types/address32",
+    "move-core-types/address32",
     "move-idl-types/address32",
-    "module-id/address32",
     "struct-tag/address32",
 ]
 
 [dependencies]
 anyhow = "1.0.42"
-account-address = "0.1.6"
 docstring = { version = "0.2.2", path = "../docstring" }
 errmapgen = { version = "0.2.0", path = "../errmapgen" }
-module-id = "0.1.4"
-struct-tag = "0.1.4"
-move-bytecode-verifier = "0.1.6"
+struct-tag = "0.2.0"
+move-bytecode-verifier = "0.2.1"
 move-idl-types = { version = "0.3.0", path = "../move-idl-types" }
-mv-binary-format = "0.1.6"
-mv-core-types = "0.1.6"
-mv-model = "0.1.6"
-mv-package = "0.1.6"
+mv-binary-format = "0.2.1"
+move-core-types = { version = "0.2.1", package = "mv-core-types" }
+move-model = { version = "0.2.1", package = "mv-model" }
+move-package = { version = "0.2.1", package = "mv-package" }
 serde = { version = "1.0", features = ["derive"] }

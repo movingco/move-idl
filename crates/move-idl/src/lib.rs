@@ -1,11 +1,8 @@
 //! Move IDL generator.
 
-use account_address::AccountAddressData;
 use anyhow::*;
 use errmapgen::{ErrmapGen, ErrmapOptions};
 use generate::gen_module::{generate_idl_for_module, generate_idl_structs_for_module};
-use module_id::ModuleIdData;
-use move_core_types::{account_address::AccountAddress, language_storage::ModuleId};
 pub use move_idl_types::*;
 use move_model::model::GlobalEnv;
 use move_package::{resolution::resolution_graph::ResolutionPackage, BuildConfig, ModelConfig};

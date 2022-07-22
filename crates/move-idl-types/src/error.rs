@@ -1,9 +1,10 @@
-use std::collections::BTreeMap;
+//! Error mapping helpers.
 
+use crate::*;
 use errmap::{ErrorDescription, ErrorMapping};
-use module_id::ModuleIdData;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
 
 /// IDL error mapping.
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]

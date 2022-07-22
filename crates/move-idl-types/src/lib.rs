@@ -1,14 +1,11 @@
 //! Rust types for the Move IDL specification.
 
 mod error;
-use account_address::AccountAddressData;
 pub use error::*;
-
-use module_id::ModuleIdData;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet};
-use struct_tag::StructTagData;
+pub use struct_tag::*;
 
 /// A set of modules.
 #[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
