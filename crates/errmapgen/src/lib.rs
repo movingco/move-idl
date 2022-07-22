@@ -4,12 +4,11 @@
 // Copyright (c) The Move Contributors
 // SPDX-License-Identifier: Apache-2.0
 
+use account_address::AccountAddress;
 use anyhow::{bail, Result};
 use docstring::normalize_doc_string;
 pub use errmap::*;
-use move_core_types::{
-    account_address::AccountAddress, ident_str, identifier::Identifier, language_storage::ModuleId,
-};
+use move_core_types::{ident_str, identifier::Identifier, language_storage::ModuleId};
 use move_model::{
     ast::Value,
     model::{GlobalEnv, ModuleEnv, NamedConstantEnv},
