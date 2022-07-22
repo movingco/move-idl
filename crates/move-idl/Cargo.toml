@@ -42,7 +42,7 @@ module-id = "0.1.4"
 struct-tag = "0.1.4"
 move-bytecode-verifier = "0.1.6"
 move-idl-types = { version = "0.3.0", path = "../move-idl-types" }
-mv-binary-format = "0.1.6"
+mv-binary-format = "0.2.1"
 mv-core-types = "0.1.6"
 mv-model = "0.1.6"
 mv-package = "0.1.6"
