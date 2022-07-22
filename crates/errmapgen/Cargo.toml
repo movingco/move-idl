@@ -26,7 +26,7 @@ address32 = [
 anyhow = "1.0.42"
 docstring = { version = "0.2.2", path = "../docstring" }
 errmap = "0.1.0"
-mv-core-types = "0.1.4"
+mv-core-types = "0.2.1"
 mv-model = "0.1.4"
 serde = { version = "1.0", features = ["derive"] }
 static-address = "0.1"
