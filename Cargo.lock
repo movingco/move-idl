@@ -352,7 +352,7 @@ dependencies = [
 
 [[package]]
 name = "errmapgen"
-version = "0.2.3"
+version = "0.4.0"
 dependencies = [
  "account-address",
  "anyhow",
@@ -659,7 +659,7 @@ dependencies = [
 
 [[package]]
 name = "move-idl"
-version = "0.3.0"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "docstring",
@@ -676,7 +676,7 @@ dependencies = [
 
 [[package]]
 name = "move-idl-parse"
-version = "0.3.0"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -689,7 +689,7 @@ dependencies = [
 
 [[package]]
 name = "move-idl-schema"
-version = "0.3.0"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -701,7 +701,7 @@ dependencies = [
 
 [[package]]
 name = "move-idl-types"
-version = "0.3.0"
+version = "0.4.0"
 dependencies = [
  "errmap",
  "schemars",

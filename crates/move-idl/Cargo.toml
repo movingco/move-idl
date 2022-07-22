@@ -1,6 +1,6 @@
 [package]
 name = "move-idl"
-version = "0.3.0"
+version = "0.4.0"
 description = "Move IDL"
 homepage = "https://moving.wtf"
 repository = "https://github.com/movingco/move-idl"
@@ -32,10 +32,10 @@ address32 = [
 [dependencies]
 anyhow = "1.0.42"
 docstring = { version = "0.2.2", path = "../docstring" }
-errmapgen = { version = "0.2.0", path = "../errmapgen" }
+errmapgen = { version = "0.4.0", path = "../errmapgen" }
 struct-tag = "0.2.0"
 move-bytecode-verifier = "0.2.1"
-move-idl-types = { version = "0.3.0", path = "../move-idl-types" }
+move-idl-types = { version = "0.4.0", path = "../move-idl-types" }
 mv-binary-format = "0.2.1"
 move-core-types = { version = "0.2.1", package = "mv-core-types" }
 move-model = { version = "0.2.1", package = "mv-model" }
