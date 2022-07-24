@@ -4,23 +4,24 @@
 // Copyright (c) The Move Contributors
 // SPDX-License-Identifier: Apache-2.0
 
-use account_address::AccountAddress;
 use anyhow::{bail, Result};
 use docstring::normalize_doc_string;
 pub use errmap::*;
-use move_core_types::{ident_str, identifier::Identifier, language_storage::ModuleId};
+use move_core_types::{
+    account_address::AccountAddress, ident_str, identifier::Identifier, language_storage::ModuleId,
+};
 use move_model::{
     ast::Value,
     model::{GlobalEnv, ModuleEnv, NamedConstantEnv},
     symbol::Symbol,
 };
 use serde::{Deserialize, Serialize};
-use std::rc::Rc;
+use std::{collections::HashSet, rc::Rc};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ErrmapOptions {
-    /// The constant prefix that determines if a constant is an error or not
-    pub error_prefix: String,
+    /// The constant prefixes that determine if a constant is an error or not
+    pub error_prefixes: HashSet<String>,
     /// The module ID of the error category module
     pub error_category_module: ModuleId,
 }
@@ -28,10 +29,10 @@ pub struct ErrmapOptions {
 impl Default for ErrmapOptions {
     fn default() -> Self {
         Self {
-            error_prefix: "E".to_string(),
+            error_prefixes: HashSet::from(["E".to_string(), "PROLOGUE_E".to_string()]),
             error_category_module: ModuleId::new(
                 static_address::static_address!("0x1"),
-                ident_str!("Errors").to_owned(),
+                ident_str!("errors").to_owned(),
             ),
         }
     }
@@ -152,7 +153,12 @@ impl<'env> ErrmapGen<'env> {
     ) -> Result<()> {
         for named_constant in module.get_named_constants() {
             let name = self.name_string(named_constant.get_name());
-            if name.starts_with(&self.options.error_prefix) {
+            if self
+                .options
+                .error_prefixes
+                .iter()
+                .any(|f| name.starts_with(f))
+            {
                 let abort_code = self.get_abort_code(&named_constant)?;
                 self.output.add_module_error(
                     module_id.clone(),

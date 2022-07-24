@@ -354,7 +354,6 @@ dependencies = [
 name = "errmapgen"
 version = "0.4.0"
 dependencies = [
- "account-address",
  "anyhow",
  "docstring",
  "errmap",
@@ -366,9 +365,9 @@ dependencies = [
 
 [[package]]
 name = "fastrand"
-version = "1.7.0"
+version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c3fcf0cee53519c866c09b5de1f6c56ff9d647101f81c1964fa632e148896cdf"
+checksum = "a7a407cfaa3385c4ae6b23e84623d48c2798d06e3e6a1878f7f59f17b3f86499"
 dependencies = [
  "instant",
 ]
@@ -583,9 +582,9 @@ dependencies = [
 
 [[package]]
 name = "module-id"
-version = "0.2.0"
+version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ec3169425fc90bdf2c24ead3b5fe3c3950c40174027bb8163ee3e5113cf3d896"
+checksum = "5447e4a38a2376021338c807a76e675b89a753bde09006b6630daf9060c97821"
 dependencies = [
  "account-address",
  "anyhow",
@@ -1178,7 +1177,7 @@ checksum = "09a279cbf25cb0757810394fbc1e359949b59e348145c643a939a525692e6929"
 dependencies = [
  "cfg-if 1.0.0",
  "libc",
- "redox_syscall 0.2.13",
+ "redox_syscall 0.2.15",
  "smallvec",
  "windows-sys",
 ]
@@ -1311,9 +1310,9 @@ checksum = "41cc0f7e4d5d4544e8861606a285bb08d3e70712ccc7d2b84d7c0ccfaf4b05ce"
 
 [[package]]
 name = "redox_syscall"
-version = "0.2.13"
+version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "62f25bc4c7e55e0b0b7a1d43fb893f4fa1361d0abe38b9ce4f323c2adfe6ef42"
+checksum = "534cfe58d6a18cc17120fbf4635d53d14691c1fe4d951064df9bd326178d7d5a"
 dependencies = [
  "bitflags",
 ]
@@ -1325,7 +1324,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b033d837a7cf162d7993aded9304e30a83213c648b6e389db233191f891e5c2b"
 dependencies = [
  "getrandom",
- "redox_syscall 0.2.13",
+ "redox_syscall 0.2.15",
  "thiserror",
 ]
 
@@ -1586,9 +1585,19 @@ checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 
 [[package]]
 name = "static-address"
-version = "0.2.0"
+version = "0.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6e86527ec6b49a08ba86e44bdd26678eadf58fb871cf4ac19ad401d0de98b513"
+checksum = "8b4d7cbb76ebe4989127985dd8c2d4ce71e41e8ec6e9561fea2ef678cddbe036"
+dependencies = [
+ "account-address",
+ "static-address-macro",
+]
+
+[[package]]
+name = "static-address-macro"
+version = "0.2.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b96aea54029d37007426915625ff3a852aa06106f09cf0a55c8fb14d95b69997"
 dependencies = [
  "static-address-parser",
  "syn",
@@ -1596,9 +1605,9 @@ dependencies = [
 
 [[package]]
 name = "static-address-parser"
-version = "0.2.0"
+version = "0.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e7bf20b3b89fa446d497aa7a75b5febebad8618afb754ec537a9b683c707cdd5"
+checksum = "f6ef96f9f0def8d27873a6e3282acf83b623f7aec17fc3f4bf0ac6dc7898d97e"
 dependencies = [
  "account-address",
  "proc-macro2",
@@ -1651,7 +1660,7 @@ dependencies = [
  "cfg-if 1.0.0",
  "fastrand",
  "libc",
- "redox_syscall 0.2.13",
+ "redox_syscall 0.2.15",
  "remove_dir_all",
  "winapi",
 ]
