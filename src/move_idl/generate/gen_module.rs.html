@@ -112,16 +112,14 @@
 <span id="107">107</span>
 <span id="108">108</span>
 <span id="109">109</span>
-<span id="110">110</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Generates the IDL for a module.</span>
 
 <span class="kw">use</span> <span class="ident">anyhow</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">docstring::normalize_doc_string</span>;
 <span class="kw">use</span> <span class="ident">errmapgen</span>::{<span class="ident">ErrorDescription</span>, <span class="ident">ErrorMapping</span>};
-<span class="kw">use</span> <span class="ident">module_id::ModuleIdData</span>;
 <span class="kw">use</span> <span class="ident">move_bytecode_verifier::script_signature</span>;
 <span class="kw">use</span> <span class="ident">move_core_types::identifier::IdentStr</span>;
-<span class="kw">use</span> <span class="ident">move_idl_types</span>::{<span class="ident">IDLModule</span>, <span class="ident">IDLStruct</span>};
+<span class="kw">use</span> <span class="ident">move_idl_types</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">move_model</span>::{
     <span class="ident">model</span>::{<span class="ident">GlobalEnv</span>, <span class="ident">ModuleEnv</span>},
     <span class="ident">ty</span>,

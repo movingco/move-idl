@@ -62,14 +62,18 @@
 <span id="57">57</span>
 <span id="58">58</span>
 <span id="59">59</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections::BTreeMap</span>;
+<span id="60">60</span>
+<span id="61">61</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Error mapping helpers.</span>
 
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">errmap</span>::{<span class="ident">ErrorDescription</span>, <span class="ident">ErrorMapping</span>};
-<span class="kw">use</span> <span class="ident">module_id::ModuleIdData</span>;
+<span class="kw">use</span> <span class="ident">schemars::JsonSchema</span>;
 <span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
+<span class="kw">use</span> <span class="ident">std::collections::BTreeMap</span>;
 
 <span class="doccomment">/// IDL error mapping.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">JsonSchema</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IDLErrorMapping</span> {
     <span class="doccomment">/// The set of error categories and their descriptions</span>
     <span class="kw">pub</span> <span class="ident">error_categories</span>: <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">u64</span>, <span class="ident">IDLError</span><span class="op">&gt;</span>,
@@ -100,7 +104,7 @@
 }
 
 <span class="doccomment">/// IDL error.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">JsonSchema</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IDLError</span> {
     <span class="doccomment">/// The constant name of error e.g., ECANT_PAY_DEPOSIT</span>
     <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
