@@ -16,7 +16,7 @@ address32 = ["move-idl/address32"]
 
 [dependencies]
 anyhow = "1.0.42"
-async-trait = "0.1.56"
+async-trait = "0.1.57"
 clap = { version = "3.2", features = ["derive"] }
 clitool = { version = "0.2.0", path = "../clitool" }
 move-idl = { version = "0.4.0", path = "../move-idl" }
