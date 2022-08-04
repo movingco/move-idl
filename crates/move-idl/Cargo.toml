@@ -36,7 +36,7 @@ errmapgen = { version = "0.4.0", path = "../errmapgen" }
 struct-tag = "0.2.0"
 move-bytecode-verifier = "0.2.1"
 move-idl-types = { version = "0.4.0", path = "../move-idl-types" }
-mv-binary-format = "0.2.1"
+mv-binary-format = "0.3.0"
 move-core-types = { version = "0.2.1", package = "mv-core-types" }
 move-model = { version = "0.2.1", package = "mv-model" }
 move-package = { version = "0.2.1", package = "mv-package" }
