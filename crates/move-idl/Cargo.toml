@@ -30,7 +30,7 @@ address32 = [
 ]
 
 [dependencies]
-anyhow = "1.0.42"
+anyhow = "1.0.60"
 docstring = { version = "0.2.2", path = "../docstring" }
 errmapgen = { version = "0.4.0", path = "../errmapgen" }
 struct-tag = "0.2.0"
