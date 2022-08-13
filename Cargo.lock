@@ -600,7 +600,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b745d939495acf448dd0e29e7e2eff34bcf481fb7e4c3f452d9377f9426a263b"
 dependencies = [
  "anyhow",
- "mv-binary-format",
+ "mv-binary-format 0.2.1",
  "mv-core-types 0.2.1",
  "petgraph 0.5.1",
  "serde-reflection",
@@ -613,9 +613,22 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e3dd902476c4bd8844c82377d4577edf5033681f7fb295e736d794afe115f5f0"
 dependencies = [
  "anyhow",
- "mv-binary-format",
- "mv-borrow-graph",
+ "mv-binary-format 0.2.1",
+ "mv-borrow-graph 0.2.1",
  "mv-core-types 0.2.1",
+ "petgraph 0.5.1",
+]
+
+[[package]]
+name = "move-bytecode-verifier"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "30ccf7cc3ac1ad4d717dfc79fa311a232872d76b98a28c6d8a1943f37869f291"
+dependencies = [
+ "anyhow",
+ "mv-binary-format 0.3.1",
+ "mv-borrow-graph 0.3.1",
+ "mv-core-types 0.3.1",
  "petgraph 0.5.1",
 ]
 
@@ -647,7 +660,7 @@ dependencies = [
  "codespan",
  "colored",
  "move-command-line-common",
- "mv-binary-format",
+ "mv-binary-format 0.2.1",
  "mv-bytecode-source-map",
  "mv-core-types 0.2.1",
  "mv-ir-types",
@@ -663,9 +676,9 @@ dependencies = [
  "anyhow",
  "docstring",
  "errmapgen",
- "move-bytecode-verifier",
+ "move-bytecode-verifier 0.3.1",
  "move-idl-types",
- "mv-binary-format",
+ "mv-binary-format 0.2.1",
  "mv-core-types 0.2.1",
  "mv-model",
  "mv-package",
@@ -720,7 +733,7 @@ dependencies = [
  "move-command-line-common",
  "move-ir-to-bytecode-syntax",
  "move-symbol-pool",
- "mv-binary-format",
+ "mv-binary-format 0.2.1",
  "mv-bytecode-source-map",
  "mv-core-types 0.2.1",
  "mv-ir-types",
@@ -762,7 +775,7 @@ dependencies = [
  "bcs",
  "heck 0.3.3",
  "log",
- "move-bytecode-verifier",
+ "move-bytecode-verifier 0.2.1",
  "move-command-line-common",
  "mv-core-types 0.2.1",
  "mv-model",
@@ -784,10 +797,30 @@ dependencies = [
 ]
 
 [[package]]
+name = "mv-binary-format"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4ecd56d316e1d5eb752cee40f9477e2d9bf699afafe6151181a6244c77b7784c"
+dependencies = [
+ "anyhow",
+ "mv-core-types 0.3.1",
+ "once_cell",
+ "ref-cast",
+ "serde 1.0.143",
+ "variant_count",
+]
+
+[[package]]
 name = "mv-borrow-graph"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8b3405d0297832218b4b1430d3b5e7b9812a4cc05001394c76d61b8654ebcdcd"
+
+[[package]]
+name = "mv-borrow-graph"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9735379f64426cd0a623333a35201d19a27141d012fcff84ab92777b55ad559c"
 
 [[package]]
 name = "mv-bytecode-source-map"
@@ -799,7 +832,7 @@ dependencies = [
  "bcs",
  "move-command-line-common",
  "move-symbol-pool",
- "mv-binary-format",
+ "mv-binary-format 0.2.1",
  "mv-core-types 0.2.1",
  "mv-ir-types",
  "serde 1.0.143",
@@ -817,12 +850,12 @@ dependencies = [
  "codespan-reporting",
  "difference",
  "hex",
- "move-bytecode-verifier",
+ "move-bytecode-verifier 0.2.1",
  "move-command-line-common",
  "move-ir-to-bytecode",
  "move-symbol-pool",
- "mv-binary-format",
- "mv-borrow-graph",
+ "mv-binary-format 0.2.1",
+ "mv-borrow-graph 0.2.1",
  "mv-bytecode-source-map",
  "mv-core-types 0.2.1",
  "mv-ir-types",
@@ -876,10 +909,10 @@ dependencies = [
  "anyhow",
  "clap",
  "colored",
- "move-bytecode-verifier",
+ "move-bytecode-verifier 0.2.1",
  "move-command-line-common",
  "move-coverage",
- "mv-binary-format",
+ "mv-binary-format 0.2.1",
  "mv-bytecode-source-map",
  "mv-compiler",
  "mv-core-types 0.2.1",
@@ -932,10 +965,10 @@ dependencies = [
  "internment",
  "itertools",
  "log",
- "move-bytecode-verifier",
+ "move-bytecode-verifier 0.2.1",
  "move-command-line-common",
  "move-symbol-pool",
- "mv-binary-format",
+ "mv-binary-format 0.2.1",
  "mv-bytecode-source-map",
  "mv-compiler",
  "mv-core-types 0.2.1",
@@ -962,7 +995,7 @@ dependencies = [
  "move-command-line-common",
  "move-symbol-pool",
  "mv-abigen",
- "mv-binary-format",
+ "mv-binary-format 0.2.1",
  "mv-bytecode-source-map",
  "mv-compiler",
  "mv-core-types 0.2.1",
