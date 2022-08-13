@@ -600,7 +600,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b745d939495acf448dd0e29e7e2eff34bcf481fb7e4c3f452d9377f9426a263b"
 dependencies = [
  "anyhow",
- "mv-binary-format",
+ "mv-binary-format 0.2.1",
  "mv-core-types 0.2.1",
  "petgraph 0.5.1",
  "serde-reflection",
@@ -613,7 +613,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e3dd902476c4bd8844c82377d4577edf5033681f7fb295e736d794afe115f5f0"
 dependencies = [
  "anyhow",
- "mv-binary-format",
+ "mv-binary-format 0.2.1",
  "mv-borrow-graph",
  "mv-core-types 0.2.1",
  "petgraph 0.5.1",
@@ -647,7 +647,7 @@ dependencies = [
  "codespan",
  "colored",
  "move-command-line-common",
- "mv-binary-format",
+ "mv-binary-format 0.2.1",
  "mv-bytecode-source-map",
  "mv-core-types 0.2.1",
  "mv-ir-types",
@@ -665,7 +665,7 @@ dependencies = [
  "errmapgen",
  "move-bytecode-verifier",
  "move-idl-types",
- "mv-binary-format",
+ "mv-binary-format 0.3.1",
  "mv-core-types 0.2.1",
  "mv-model",
  "mv-package",
@@ -720,7 +720,7 @@ dependencies = [
  "move-command-line-common",
  "move-ir-to-bytecode-syntax",
  "move-symbol-pool",
- "mv-binary-format",
+ "mv-binary-format 0.2.1",
  "mv-bytecode-source-map",
  "mv-core-types 0.2.1",
  "mv-ir-types",
@@ -784,6 +784,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "mv-binary-format"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4ecd56d316e1d5eb752cee40f9477e2d9bf699afafe6151181a6244c77b7784c"
+dependencies = [
+ "anyhow",
+ "mv-core-types 0.3.1",
+ "once_cell",
+ "ref-cast",
+ "serde 1.0.143",
+ "variant_count",
+]
+
+[[package]]
 name = "mv-borrow-graph"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -799,7 +813,7 @@ dependencies = [
  "bcs",
  "move-command-line-common",
  "move-symbol-pool",
- "mv-binary-format",
+ "mv-binary-format 0.2.1",
  "mv-core-types 0.2.1",
  "mv-ir-types",
  "serde 1.0.143",
@@ -821,7 +835,7 @@ dependencies = [
  "move-command-line-common",
  "move-ir-to-bytecode",
  "move-symbol-pool",
- "mv-binary-format",
+ "mv-binary-format 0.2.1",
  "mv-borrow-graph",
  "mv-bytecode-source-map",
  "mv-core-types 0.2.1",
@@ -879,7 +893,7 @@ dependencies = [
  "move-bytecode-verifier",
  "move-command-line-common",
  "move-coverage",
- "mv-binary-format",
+ "mv-binary-format 0.2.1",
  "mv-bytecode-source-map",
  "mv-compiler",
  "mv-core-types 0.2.1",
@@ -935,7 +949,7 @@ dependencies = [
  "move-bytecode-verifier",
  "move-command-line-common",
  "move-symbol-pool",
- "mv-binary-format",
+ "mv-binary-format 0.2.1",
  "mv-bytecode-source-map",
  "mv-compiler",
  "mv-core-types 0.2.1",
@@ -962,7 +976,7 @@ dependencies = [
  "move-command-line-common",
  "move-symbol-pool",
  "mv-abigen",
- "mv-binary-format",
+ "mv-binary-format 0.2.1",
  "mv-bytecode-source-map",
  "mv-compiler",
  "mv-core-types 0.2.1",
