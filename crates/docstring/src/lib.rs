@@ -38,7 +38,9 @@ pub fn normalize_indentation(string: &str) -> String {
 
 /// Remove asterisks if the doc string is formatted with asterisks.
 pub fn remove_asterisks_if_asterisk_docs(s: &str) -> String {
-    let should_remove_asterisks = s.lines().all(|l| l.is_empty() || l.starts_with("* "));
+    let should_remove_asterisks = s
+        .lines()
+        .all(|l| l.is_empty() || l.starts_with("* ") || l == "*");
     if should_remove_asterisks {
         s.lines()
             .map(|line| {
