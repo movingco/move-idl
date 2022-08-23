@@ -6,9 +6,11 @@ pub fn normalize_doc_string(s: &str) -> Option<String> {
     if trimmed.is_empty() {
         None
     } else {
-        Some(remove_asterisks_if_asterisk_docs(
-            normalize_indentation(s).trim(),
-        ))
+        Some(
+            remove_asterisks_if_asterisk_docs(&normalize_indentation(s))
+                .trim()
+                .to_string(),
+        )
     }
 }
 
@@ -48,6 +50,8 @@ pub fn remove_asterisks_if_asterisk_docs(s: &str) -> String {
             .map(|line| {
                 if let Some(fmt) = line.strip_prefix("* ") {
                     fmt
+                } else if line == "*" {
+                    ""
                 } else {
                     line
                 }
