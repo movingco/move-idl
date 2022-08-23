@@ -6,7 +6,9 @@ pub fn normalize_doc_string(s: &str) -> Option<String> {
     if trimmed.is_empty() {
         None
     } else {
-        Some(remove_asterisks_if_asterisk_docs(&normalize_indentation(s)))
+        Some(remove_asterisks_if_asterisk_docs(
+            normalize_indentation(s).trim(),
+        ))
     }
 }
 
