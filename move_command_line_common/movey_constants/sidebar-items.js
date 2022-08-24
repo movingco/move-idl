@@ -1,1 +1,1 @@
-initSidebarItems({"constant":[["MOVEY_URL",""]]});
+initSidebarItems({"constant":[["MOVEY_CREDENTIAL_PATH",""],["MOVEY_URL",""]]});

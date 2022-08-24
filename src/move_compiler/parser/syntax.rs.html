@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/mv-compiler-0.3.1/src/parser/syntax.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>syntax.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/mv-compiler-0.3.2/src/parser/syntax.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>syntax.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../move_compiler/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -3148,6 +3148,91 @@
 <span id="3143">3143</span>
 <span id="3144">3144</span>
 <span id="3145">3145</span>
+<span id="3146">3146</span>
+<span id="3147">3147</span>
+<span id="3148">3148</span>
+<span id="3149">3149</span>
+<span id="3150">3150</span>
+<span id="3151">3151</span>
+<span id="3152">3152</span>
+<span id="3153">3153</span>
+<span id="3154">3154</span>
+<span id="3155">3155</span>
+<span id="3156">3156</span>
+<span id="3157">3157</span>
+<span id="3158">3158</span>
+<span id="3159">3159</span>
+<span id="3160">3160</span>
+<span id="3161">3161</span>
+<span id="3162">3162</span>
+<span id="3163">3163</span>
+<span id="3164">3164</span>
+<span id="3165">3165</span>
+<span id="3166">3166</span>
+<span id="3167">3167</span>
+<span id="3168">3168</span>
+<span id="3169">3169</span>
+<span id="3170">3170</span>
+<span id="3171">3171</span>
+<span id="3172">3172</span>
+<span id="3173">3173</span>
+<span id="3174">3174</span>
+<span id="3175">3175</span>
+<span id="3176">3176</span>
+<span id="3177">3177</span>
+<span id="3178">3178</span>
+<span id="3179">3179</span>
+<span id="3180">3180</span>
+<span id="3181">3181</span>
+<span id="3182">3182</span>
+<span id="3183">3183</span>
+<span id="3184">3184</span>
+<span id="3185">3185</span>
+<span id="3186">3186</span>
+<span id="3187">3187</span>
+<span id="3188">3188</span>
+<span id="3189">3189</span>
+<span id="3190">3190</span>
+<span id="3191">3191</span>
+<span id="3192">3192</span>
+<span id="3193">3193</span>
+<span id="3194">3194</span>
+<span id="3195">3195</span>
+<span id="3196">3196</span>
+<span id="3197">3197</span>
+<span id="3198">3198</span>
+<span id="3199">3199</span>
+<span id="3200">3200</span>
+<span id="3201">3201</span>
+<span id="3202">3202</span>
+<span id="3203">3203</span>
+<span id="3204">3204</span>
+<span id="3205">3205</span>
+<span id="3206">3206</span>
+<span id="3207">3207</span>
+<span id="3208">3208</span>
+<span id="3209">3209</span>
+<span id="3210">3210</span>
+<span id="3211">3211</span>
+<span id="3212">3212</span>
+<span id="3213">3213</span>
+<span id="3214">3214</span>
+<span id="3215">3215</span>
+<span id="3216">3216</span>
+<span id="3217">3217</span>
+<span id="3218">3218</span>
+<span id="3219">3219</span>
+<span id="3220">3220</span>
+<span id="3221">3221</span>
+<span id="3222">3222</span>
+<span id="3223">3223</span>
+<span id="3224">3224</span>
+<span id="3225">3225</span>
+<span id="3226">3226</span>
+<span id="3227">3227</span>
+<span id="3228">3228</span>
+<span id="3229">3229</span>
+<span id="3230">3230</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright (c) The Diem Core Contributors</span>
 <span class="comment">// Copyright (c) The Move Contributors</span>
 <span class="comment">// SPDX-License-Identifier: Apache-2.0</span>
@@ -4033,13 +4118,37 @@
 <span class="comment">//          | &quot;(&quot; &lt;Exp&gt; &quot;:&quot; &lt;Type&gt; &quot;)&quot;</span>
 <span class="comment">//          | &quot;(&quot; &lt;Exp&gt; &quot;as&quot; &lt;Type&gt; &quot;)&quot;</span>
 <span class="comment">//          | &quot;{&quot; &lt;Sequence&gt;</span>
+<span class="comment">//          | &quot;if&quot; &quot;(&quot; &lt;Exp&gt; &quot;)&quot; &lt;Exp&gt; &quot;else&quot; &quot;{&quot; &lt;Exp&gt; &quot;}&quot;</span>
+<span class="comment">//          | &quot;if&quot; &quot;(&quot; &lt;Exp&gt; &quot;)&quot; &quot;{&quot; &lt;Exp&gt; &quot;}&quot;</span>
+<span class="comment">//          | &quot;if&quot; &quot;(&quot; &lt;Exp&gt; &quot;)&quot; &lt;Exp&gt; (&quot;else&quot; &lt;Exp&gt;)?</span>
+<span class="comment">//          | &quot;while&quot; &quot;(&quot; &lt;Exp&gt; &quot;)&quot; &quot;{&quot; &lt;Exp&gt; &quot;}&quot;</span>
+<span class="comment">//          | &quot;while&quot; &quot;(&quot; &lt;Exp&gt; &quot;)&quot; &lt;Exp&gt; (SpecBlock)?</span>
+<span class="comment">//          | &quot;loop&quot; &lt;Exp&gt;</span>
+<span class="comment">//          | &quot;loop&quot; &quot;{&quot; &lt;Exp&gt; &quot;}&quot;</span>
+<span class="comment">//          | &quot;return&quot; &quot;{&quot; &lt;Exp&gt; &quot;}&quot;</span>
+<span class="comment">//          | &quot;return&quot; &lt;Exp&gt;?</span>
+<span class="comment">//          | &quot;abort&quot; &quot;{&quot; &lt;Exp&gt; &quot;}&quot;</span>
+<span class="comment">//          | &quot;abort&quot; &lt;Exp&gt;</span>
 <span class="kw">fn</span> <span class="ident">parse_term</span>(<span class="ident">context</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Context</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Exp</span>, <span class="ident">Diagnostic</span><span class="op">&gt;</span> {
     <span class="kw">const</span> <span class="ident">VECTOR_IDENT</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;vector&quot;</span>;
 
     <span class="kw">let</span> <span class="ident">start_loc</span> <span class="op">=</span> <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">start_loc</span>();
     <span class="kw">let</span> <span class="ident">term</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">peek</span>() {
+        <span class="ident">tok</span> <span class="kw">if</span> <span class="ident">is_control_exp</span>(<span class="ident">tok</span>) =&gt; {
+            <span class="kw">let</span> (<span class="ident">control_exp</span>, <span class="ident">ends_in_block</span>) <span class="op">=</span> <span class="ident">parse_control_exp</span>(<span class="ident">context</span>)<span class="question-mark">?</span>;
+            <span class="kw">if</span> <span class="op">!</span><span class="ident">ends_in_block</span> <span class="op">|</span><span class="op">|</span> <span class="ident">at_end_of_exp</span>(<span class="ident">context</span>) {
+                <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">control_exp</span>);
+            }
+
+            <span class="kw">return</span> <span class="ident">parse_binop_exp</span>(<span class="ident">context</span>, <span class="ident">control_exp</span>, <span class="comment">/* min_prec */</span> <span class="number">1</span>);
+        }
         <span class="ident">Tok::Break</span> =&gt; {
             <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">advance</span>()<span class="question-mark">?</span>;
+            <span class="kw">if</span> <span class="ident">at_start_of_exp</span>(<span class="ident">context</span>) {
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">diag</span> <span class="op">=</span> <span class="ident">unexpected_token_error</span>(<span class="ident">context</span>.<span class="ident">tokens</span>, <span class="string">&quot;the end of an expression&quot;</span>);
+                <span class="ident">diag</span>.<span class="ident">add_note</span>(<span class="string">&quot;&#39;break&#39; with a value is not yet supported&quot;</span>);
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">diag</span>);
+            }
             <span class="ident">Exp_::Break</span>
         }
 
@@ -4160,6 +4269,119 @@
     ))
 }
 
+<span class="kw">fn</span> <span class="ident">is_control_exp</span>(<span class="ident">tok</span>: <span class="ident">Tok</span>) -&gt; <span class="ident">bool</span> {
+    <span class="macro">matches!</span>(
+        <span class="ident">tok</span>,
+        <span class="ident">Tok::If</span> <span class="op">|</span> <span class="ident">Tok::While</span> <span class="op">|</span> <span class="ident">Tok::Loop</span> <span class="op">|</span> <span class="ident">Tok::Return</span> <span class="op">|</span> <span class="ident">Tok::Abort</span>
+    )
+}
+
+<span class="comment">// if there is a block, only parse the block, not any subsequent tokens</span>
+<span class="comment">// e.g.           if (cond) e1 else { e2 } + 1</span>
+<span class="comment">// should be,    (if (cond) e1 else { e2 }) + 1</span>
+<span class="comment">// AND NOT,       if (cond) e1 else ({ e2 } + 1)</span>
+<span class="comment">// But otherwise, if (cond) e1 else e2 + 1</span>
+<span class="comment">// should be,     if (cond) e1 else (e2 + 1)</span>
+<span class="kw">fn</span> <span class="ident">parse_control_exp</span>(<span class="ident">context</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Context</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Exp</span>, <span class="ident">bool</span>), <span class="ident">Diagnostic</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">parse_exp_or_sequence</span>(<span class="ident">context</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Context</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Exp</span>, <span class="ident">bool</span>), <span class="ident">Diagnostic</span><span class="op">&gt;</span> {
+        <span class="kw">match</span> <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">peek</span>() {
+            <span class="ident">Tok::LBrace</span> =&gt; {
+                <span class="kw">let</span> <span class="ident">block_start_loc</span> <span class="op">=</span> <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">start_loc</span>();
+                <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">advance</span>()<span class="question-mark">?</span>; <span class="comment">// consume the LBrace</span>
+                <span class="kw">let</span> <span class="ident">block_</span> <span class="op">=</span> <span class="ident">Exp_::Block</span>(<span class="ident">parse_sequence</span>(<span class="ident">context</span>)<span class="question-mark">?</span>);
+                <span class="kw">let</span> <span class="ident">block_end_loc</span> <span class="op">=</span> <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">previous_end_loc</span>();
+                <span class="kw">let</span> <span class="ident">exp</span> <span class="op">=</span> <span class="ident">spanned</span>(
+                    <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">file_hash</span>(),
+                    <span class="ident">block_start_loc</span>,
+                    <span class="ident">block_end_loc</span>,
+                    <span class="ident">block_</span>,
+                );
+                <span class="prelude-val">Ok</span>((<span class="ident">exp</span>, <span class="bool-val">true</span>))
+            }
+            <span class="kw">_</span> =&gt; <span class="prelude-val">Ok</span>((<span class="ident">parse_exp</span>(<span class="ident">context</span>)<span class="question-mark">?</span>, <span class="bool-val">false</span>)),
+        }
+    }
+    <span class="kw">let</span> <span class="ident">start_loc</span> <span class="op">=</span> <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">start_loc</span>();
+    <span class="kw">let</span> (<span class="ident">exp_</span>, <span class="ident">ends_in_block</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">peek</span>() {
+        <span class="ident">Tok::If</span> =&gt; {
+            <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">advance</span>()<span class="question-mark">?</span>;
+            <span class="ident">consume_token</span>(<span class="ident">context</span>.<span class="ident">tokens</span>, <span class="ident">Tok::LParen</span>)<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">eb</span> <span class="op">=</span> <span class="ident">Box::new</span>(<span class="ident">parse_exp</span>(<span class="ident">context</span>)<span class="question-mark">?</span>);
+            <span class="ident">consume_token</span>(<span class="ident">context</span>.<span class="ident">tokens</span>, <span class="ident">Tok::RParen</span>)<span class="question-mark">?</span>;
+            <span class="kw">let</span> (<span class="ident">et</span>, <span class="ident">ends_in_block</span>) <span class="op">=</span> <span class="ident">parse_exp_or_sequence</span>(<span class="ident">context</span>)<span class="question-mark">?</span>;
+            <span class="kw">let</span> (<span class="ident">ef</span>, <span class="ident">ends_in_block</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">match_token</span>(<span class="ident">context</span>.<span class="ident">tokens</span>, <span class="ident">Tok::Else</span>)<span class="question-mark">?</span> {
+                <span class="kw">let</span> (<span class="ident">ef</span>, <span class="ident">ends_in_block</span>) <span class="op">=</span> <span class="ident">parse_exp_or_sequence</span>(<span class="ident">context</span>)<span class="question-mark">?</span>;
+                (<span class="prelude-val">Some</span>(<span class="ident">Box::new</span>(<span class="ident">ef</span>)), <span class="ident">ends_in_block</span>)
+            } <span class="kw">else</span> {
+                (<span class="prelude-val">None</span>, <span class="ident">ends_in_block</span>)
+            };
+            (<span class="ident">Exp_::IfElse</span>(<span class="ident">eb</span>, <span class="ident">Box::new</span>(<span class="ident">et</span>), <span class="ident">ef</span>), <span class="ident">ends_in_block</span>)
+        }
+        <span class="ident">Tok::While</span> =&gt; {
+            <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">advance</span>()<span class="question-mark">?</span>;
+            <span class="ident">consume_token</span>(<span class="ident">context</span>.<span class="ident">tokens</span>, <span class="ident">Tok::LParen</span>)<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">econd</span> <span class="op">=</span> <span class="ident">parse_exp</span>(<span class="ident">context</span>)<span class="question-mark">?</span>;
+            <span class="ident">consume_token</span>(<span class="ident">context</span>.<span class="ident">tokens</span>, <span class="ident">Tok::RParen</span>)<span class="question-mark">?</span>;
+            <span class="kw">let</span> (<span class="ident">eloop</span>, <span class="ident">ends_in_block</span>) <span class="op">=</span> <span class="ident">parse_exp_or_sequence</span>(<span class="ident">context</span>)<span class="question-mark">?</span>;
+            <span class="kw">let</span> (<span class="ident">econd</span>, <span class="ident">ends_in_block</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">peek</span>() <span class="op">==</span> <span class="ident">Tok::Spec</span> {
+                <span class="comment">// Parse a loop invariant. Also validate that only `invariant`</span>
+                <span class="comment">// properties are contained in the spec block. This is</span>
+                <span class="comment">// transformed into `while ({spec { .. }; cond) body`.</span>
+                <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">parse_spec_block</span>(<span class="macro">vec!</span>[], <span class="ident">context</span>)<span class="question-mark">?</span>;
+                <span class="kw">for</span> <span class="ident">member</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">spec</span>.<span class="ident">value</span>.<span class="ident">members</span> {
+                    <span class="kw">match</span> <span class="ident">member</span>.<span class="ident">value</span> {
+                        <span class="comment">// Ok</span>
+                        <span class="ident">SpecBlockMember_::Condition</span> {
+                            <span class="ident">kind</span>: <span class="macro">sp!</span>(<span class="kw">_</span>, <span class="ident">SpecConditionKind_::Invariant</span>(..)),
+                            ..
+                        } =&gt; (),
+                        <span class="kw">_</span> =&gt; {
+                            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="macro">diag!</span>(
+                                <span class="ident">Syntax::InvalidSpecBlockMember</span>,
+                                (<span class="ident">member</span>.<span class="ident">loc</span>, <span class="string">&quot;only &#39;invariant&#39; allowed here&quot;</span>)
+                            ))
+                        }
+                    }
+                }
+                <span class="kw">let</span> <span class="ident">spec_seq</span> <span class="op">=</span> <span class="ident">sp</span>(
+                    <span class="ident">spec</span>.<span class="ident">loc</span>,
+                    <span class="ident">SequenceItem_::Seq</span>(<span class="ident">Box::new</span>(<span class="ident">sp</span>(<span class="ident">spec</span>.<span class="ident">loc</span>, <span class="ident">Exp_::Spec</span>(<span class="ident">spec</span>)))),
+                );
+                <span class="kw">let</span> <span class="ident">loc</span> <span class="op">=</span> <span class="ident">econd</span>.<span class="ident">loc</span>;
+                <span class="kw">let</span> <span class="ident">spec_block</span> <span class="op">=</span> <span class="ident">Exp_::Block</span>((<span class="macro">vec!</span>[], <span class="macro">vec!</span>[<span class="ident">spec_seq</span>], <span class="prelude-val">None</span>, <span class="ident">Box::new</span>(<span class="prelude-val">Some</span>(<span class="ident">econd</span>))));
+                (<span class="ident">sp</span>(<span class="ident">loc</span>, <span class="ident">spec_block</span>), <span class="bool-val">true</span>)
+            } <span class="kw">else</span> {
+                (<span class="ident">econd</span>, <span class="ident">ends_in_block</span>)
+            };
+            (<span class="ident">Exp_::While</span>(<span class="ident">Box::new</span>(<span class="ident">econd</span>), <span class="ident">Box::new</span>(<span class="ident">eloop</span>)), <span class="ident">ends_in_block</span>)
+        }
+        <span class="ident">Tok::Loop</span> =&gt; {
+            <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">advance</span>()<span class="question-mark">?</span>;
+            <span class="kw">let</span> (<span class="ident">eloop</span>, <span class="ident">ends_in_block</span>) <span class="op">=</span> <span class="ident">parse_exp_or_sequence</span>(<span class="ident">context</span>)<span class="question-mark">?</span>;
+            (<span class="ident">Exp_::Loop</span>(<span class="ident">Box::new</span>(<span class="ident">eloop</span>)), <span class="ident">ends_in_block</span>)
+        }
+        <span class="ident">Tok::Return</span> =&gt; {
+            <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">advance</span>()<span class="question-mark">?</span>;
+            <span class="kw">let</span> (<span class="ident">e</span>, <span class="ident">ends_in_block</span>) <span class="op">=</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">at_start_of_exp</span>(<span class="ident">context</span>) {
+                (<span class="prelude-val">None</span>, <span class="bool-val">false</span>)
+            } <span class="kw">else</span> {
+                <span class="kw">let</span> (<span class="ident">e</span>, <span class="ident">ends_in_block</span>) <span class="op">=</span> <span class="ident">parse_exp_or_sequence</span>(<span class="ident">context</span>)<span class="question-mark">?</span>;
+                (<span class="prelude-val">Some</span>(<span class="ident">Box::new</span>(<span class="ident">e</span>)), <span class="ident">ends_in_block</span>)
+            };
+            (<span class="ident">Exp_::Return</span>(<span class="ident">e</span>), <span class="ident">ends_in_block</span>)
+        }
+        <span class="ident">Tok::Abort</span> =&gt; {
+            <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">advance</span>()<span class="question-mark">?</span>;
+            <span class="kw">let</span> (<span class="ident">e</span>, <span class="ident">ends_in_block</span>) <span class="op">=</span> <span class="ident">parse_exp_or_sequence</span>(<span class="ident">context</span>)<span class="question-mark">?</span>;
+            (<span class="ident">Exp_::Abort</span>(<span class="ident">Box::new</span>(<span class="ident">e</span>)), <span class="ident">ends_in_block</span>)
+        }
+        <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(),
+    };
+    <span class="kw">let</span> <span class="ident">end_loc</span> <span class="op">=</span> <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">previous_end_loc</span>();
+    <span class="kw">let</span> <span class="ident">exp</span> <span class="op">=</span> <span class="ident">spanned</span>(<span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">file_hash</span>(), <span class="ident">start_loc</span>, <span class="ident">end_loc</span>, <span class="ident">exp_</span>);
+    <span class="prelude-val">Ok</span>((<span class="ident">exp</span>, <span class="ident">ends_in_block</span>))
+}
+
 <span class="comment">// Parse a pack, call, or other reference to a name:</span>
 <span class="comment">//      NameExp =</span>
 <span class="comment">//          &lt;NameAccessChain&gt; &lt;OptionalTypeArgs&gt; &quot;{&quot; Comma&lt;ExpField&gt; &quot;}&quot;</span>
@@ -4246,15 +4468,39 @@
     )
 }
 
+<span class="kw">fn</span> <span class="ident">at_start_of_exp</span>(<span class="ident">context</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Context</span>) -&gt; <span class="ident">bool</span> {
+    <span class="macro">matches!</span>(
+        <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">peek</span>(),
+        <span class="comment">// value</span>
+        <span class="ident">Tok::NumValue</span>
+            <span class="op">|</span> <span class="ident">Tok::NumTypedValue</span>
+            <span class="op">|</span> <span class="ident">Tok::ByteStringValue</span>
+            <span class="op">|</span> <span class="ident">Tok::Identifier</span>
+            <span class="op">|</span> <span class="ident">Tok::AtSign</span>
+            <span class="op">|</span> <span class="ident">Tok::Copy</span>
+            <span class="op">|</span> <span class="ident">Tok::Move</span>
+            <span class="op">|</span> <span class="ident">Tok::False</span>
+            <span class="op">|</span> <span class="ident">Tok::True</span>
+            <span class="op">|</span> <span class="ident">Tok::Amp</span>
+            <span class="op">|</span> <span class="ident">Tok::AmpMut</span>
+            <span class="op">|</span> <span class="ident">Tok::Star</span>
+            <span class="op">|</span> <span class="ident">Tok::Exclaim</span>
+            <span class="op">|</span> <span class="ident">Tok::LParen</span>
+            <span class="op">|</span> <span class="ident">Tok::LBrace</span>
+            <span class="op">|</span> <span class="ident">Tok::Abort</span>
+            <span class="op">|</span> <span class="ident">Tok::Break</span>
+            <span class="op">|</span> <span class="ident">Tok::Continue</span>
+            <span class="op">|</span> <span class="ident">Tok::If</span>
+            <span class="op">|</span> <span class="ident">Tok::Loop</span>
+            <span class="op">|</span> <span class="ident">Tok::Return</span>
+            <span class="op">|</span> <span class="ident">Tok::While</span>
+    )
+}
+
 <span class="comment">// Parse an expression:</span>
 <span class="comment">//      Exp =</span>
 <span class="comment">//            &lt;LambdaBindList&gt; &lt;Exp&gt;        spec only</span>
 <span class="comment">//          | &lt;Quantifier&gt;                  spec only</span>
-<span class="comment">//          | &quot;if&quot; &quot;(&quot; &lt;Exp&gt; &quot;)&quot; &lt;Exp&gt; (&quot;else&quot; &lt;Exp&gt;)?</span>
-<span class="comment">//          | &quot;while&quot; &quot;(&quot; &lt;Exp&gt; &quot;)&quot; &lt;Exp&gt; (SpecBlock)?</span>
-<span class="comment">//          | &quot;loop&quot; &lt;Exp&gt;</span>
-<span class="comment">//          | &quot;return&quot; &lt;Exp&gt;?</span>
-<span class="comment">//          | &quot;abort&quot; &lt;Exp&gt;</span>
 <span class="comment">//          | &lt;BinOpExp&gt;</span>
 <span class="comment">//          | &lt;UnaryExp&gt; &quot;=&quot; &lt;Exp&gt;</span>
 <span class="kw">fn</span> <span class="ident">parse_exp</span>(<span class="ident">context</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Context</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Exp</span>, <span class="ident">Diagnostic</span><span class="op">&gt;</span> {
@@ -4266,82 +4512,6 @@
             <span class="ident">Exp_::Lambda</span>(<span class="ident">bindings</span>, <span class="ident">body</span>)
         }
         <span class="ident">Tok::Identifier</span> <span class="kw">if</span> <span class="ident">is_quant</span>(<span class="ident">context</span>) =&gt; <span class="ident">parse_quant</span>(<span class="ident">context</span>)<span class="question-mark">?</span>,
-        <span class="ident">Tok::If</span> =&gt; {
-            <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">advance</span>()<span class="question-mark">?</span>;
-            <span class="ident">consume_token</span>(<span class="ident">context</span>.<span class="ident">tokens</span>, <span class="ident">Tok::LParen</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">eb</span> <span class="op">=</span> <span class="ident">Box::new</span>(<span class="ident">parse_exp</span>(<span class="ident">context</span>)<span class="question-mark">?</span>);
-            <span class="ident">consume_token</span>(<span class="ident">context</span>.<span class="ident">tokens</span>, <span class="ident">Tok::RParen</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">et</span> <span class="op">=</span> <span class="ident">Box::new</span>(<span class="ident">parse_exp</span>(<span class="ident">context</span>)<span class="question-mark">?</span>);
-            <span class="kw">let</span> <span class="ident">ef</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">match_token</span>(<span class="ident">context</span>.<span class="ident">tokens</span>, <span class="ident">Tok::Else</span>)<span class="question-mark">?</span> {
-                <span class="prelude-val">Some</span>(<span class="ident">Box::new</span>(<span class="ident">parse_exp</span>(<span class="ident">context</span>)<span class="question-mark">?</span>))
-            } <span class="kw">else</span> {
-                <span class="prelude-val">None</span>
-            };
-            <span class="ident">Exp_::IfElse</span>(<span class="ident">eb</span>, <span class="ident">et</span>, <span class="ident">ef</span>)
-        }
-        <span class="ident">Tok::While</span> =&gt; {
-            <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">advance</span>()<span class="question-mark">?</span>;
-            <span class="ident">consume_token</span>(<span class="ident">context</span>.<span class="ident">tokens</span>, <span class="ident">Tok::LParen</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">econd</span> <span class="op">=</span> <span class="ident">parse_exp</span>(<span class="ident">context</span>)<span class="question-mark">?</span>;
-            <span class="ident">consume_token</span>(<span class="ident">context</span>.<span class="ident">tokens</span>, <span class="ident">Tok::RParen</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">eloop</span> <span class="op">=</span> <span class="ident">Box::new</span>(<span class="ident">parse_exp</span>(<span class="ident">context</span>)<span class="question-mark">?</span>);
-            <span class="kw">let</span> <span class="ident">econd</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">peek</span>() <span class="op">==</span> <span class="ident">Tok::Spec</span> {
-                <span class="comment">// Parse a loop invariant. Also validate that only `invariant`</span>
-                <span class="comment">// properties are contained in the spec block. This is</span>
-                <span class="comment">// transformed into `while ({spec { .. }; cond) body`.</span>
-                <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">parse_spec_block</span>(<span class="macro">vec!</span>[], <span class="ident">context</span>)<span class="question-mark">?</span>;
-                <span class="kw">for</span> <span class="ident">member</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">spec</span>.<span class="ident">value</span>.<span class="ident">members</span> {
-                    <span class="kw">match</span> <span class="ident">member</span>.<span class="ident">value</span> {
-                        <span class="ident">SpecBlockMember_::Condition</span> {
-                            <span class="ident">kind</span>: <span class="macro">sp!</span>(<span class="kw">_</span>, <span class="ident">SpecConditionKind_::Invariant</span>(..)),
-                            ..
-                        } =&gt; {
-                            <span class="comment">// Ok</span>
-                        }
-                        <span class="kw">_</span> =&gt; {
-                            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="macro">diag!</span>(
-                                <span class="ident">Syntax::InvalidSpecBlockMember</span>,
-                                (<span class="ident">member</span>.<span class="ident">loc</span>, <span class="string">&quot;only &#39;invariant&#39; allowed here&quot;</span>)
-                            ))
-                        }
-                    }
-                }
-                <span class="ident">sp</span>(
-                    <span class="ident">econd</span>.<span class="ident">loc</span>,
-                    <span class="ident">Exp_::Block</span>((
-                        <span class="macro">vec!</span>[],
-                        <span class="macro">vec!</span>[<span class="ident">sp</span>(
-                            <span class="ident">spec</span>.<span class="ident">loc</span>,
-                            <span class="ident">SequenceItem_::Seq</span>(<span class="ident">Box::new</span>(<span class="ident">sp</span>(<span class="ident">spec</span>.<span class="ident">loc</span>, <span class="ident">Exp_::Spec</span>(<span class="ident">spec</span>)))),
-                        )],
-                        <span class="prelude-val">None</span>,
-                        <span class="ident">Box::new</span>(<span class="prelude-val">Some</span>(<span class="ident">econd</span>)),
-                    )),
-                )
-            } <span class="kw">else</span> {
-                <span class="ident">econd</span>
-            };
-            <span class="ident">Exp_::While</span>(<span class="ident">Box::new</span>(<span class="ident">econd</span>), <span class="ident">eloop</span>)
-        }
-        <span class="ident">Tok::Loop</span> =&gt; {
-            <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">advance</span>()<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">eloop</span> <span class="op">=</span> <span class="ident">Box::new</span>(<span class="ident">parse_exp</span>(<span class="ident">context</span>)<span class="question-mark">?</span>);
-            <span class="ident">Exp_::Loop</span>(<span class="ident">eloop</span>)
-        }
-        <span class="ident">Tok::Return</span> =&gt; {
-            <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">advance</span>()<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">e</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">at_end_of_exp</span>(<span class="ident">context</span>) {
-                <span class="prelude-val">None</span>
-            } <span class="kw">else</span> {
-                <span class="prelude-val">Some</span>(<span class="ident">Box::new</span>(<span class="ident">parse_exp</span>(<span class="ident">context</span>)<span class="question-mark">?</span>))
-            };
-            <span class="ident">Exp_::Return</span>(<span class="ident">e</span>)
-        }
-        <span class="ident">Tok::Abort</span> =&gt; {
-            <span class="ident">context</span>.<span class="ident">tokens</span>.<span class="ident">advance</span>()<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">e</span> <span class="op">=</span> <span class="ident">Box::new</span>(<span class="ident">parse_exp</span>(<span class="ident">context</span>)<span class="question-mark">?</span>);
-            <span class="ident">Exp_::Abort</span>(<span class="ident">e</span>)
-        }
         <span class="kw">_</span> =&gt; {
             <span class="comment">// This could be either an assignment or a binary operator</span>
             <span class="comment">// expression.</span>
