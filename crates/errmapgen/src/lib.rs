@@ -85,10 +85,10 @@ impl ErrorMappingMut for ErrorMapping {
             .entry(module_id.clone().into())
             .or_default();
         if let Some(previous_entry) = module_error_map.insert(abort_code, description) {
-            bail!(format!(
-                "Duplicate entry for abort code {} found in {}, previous entry: {:#?}",
+            println!(
+                "Warning: Duplicate entry for abort code {} found in {}, previous entry: {:#?}",
                 abort_code, module_id, previous_entry
-            ))
+            )
         }
         Ok(())
     }
