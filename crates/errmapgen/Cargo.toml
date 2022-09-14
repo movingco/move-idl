@@ -23,7 +23,7 @@ address32 = [
 ]
 
 [dependencies]
-anyhow = "1.0.42"
+anyhow = "1.0.65"
 docstring = { version = "0.2.2", path = "../docstring" }
 errmap = "0.2.0"
 move-core-types = { version = "0.3.1", package = "mv-core-types" }
