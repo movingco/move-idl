@@ -10,7 +10,7 @@ edition = "2021"
 keywords = ["clap", "json", "cli"]
 
 [dependencies]
-anyhow = "1.0.42"
+anyhow = "1.0.69"
 async-trait = "0.1.56"
 clap = { version = "3.2", features = ["derive"] }
 serde = { version = "1.0.137", features = ["derive"] }
